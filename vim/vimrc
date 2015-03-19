@@ -24,36 +24,37 @@ set iskeyword-=.          " '.' represents a word
 set iskeyword-=#          " '#' represents a word
 set iskeyword-=-          " '-' represents a word
 
-set backspace=indent,eol,start  " What to delete on backspace
-set linespace=0         " No extra space between rows
-set nu              " Line numbering
-set showmatch           " Show matching brackets/parenthesis
-set incsearch           " Search as you type
-set hlsearch            " Highlight search term
-set winminheight=0      " Window can be any size
-set ignorecase          " Default search is case-insensitive
-set smartcase           " When uppercase detected, search case-sensitive
-set wildmenu            " Display menu instead of auto-complete
-set wildmode=list:longest,full  " Tab completion order
-set whichwrap=b,s,h,l,<,>,[,]   " Cursor + backspace + default wrap
-set scrolljump=5        " Jump 5 lines when cursor leave screen
-set scrolloff=3         " Minimum lines above or below cursor
-set foldenable          " Auto-fold
+set backspace=indent,eol,start " What to delete on backspace
+set foldenable                 " Auto-fold
+set hlsearch                   " Highlight search term
+set ignorecase                 " Default search is case-insensitive
+set incsearch                  " Search as you type
+set linespace=0                " No extra space between rows
+set nu                         " Line numbering
+set scrolljump=5               " Jump 5 lines when cursor leave screen
+set scrolloff=3                " Minimum lines above or below cursor
+set shortmess+=aoOtT           " Abbreviate messages
+set showmatch                  " Show matching brackets/parenthesis
+set smartcase                  " When uppercase detected, search case-sensitive
+set whichwrap=b,s,h,l,<,>,[,]  " Cursor + backspace + default wrap
+set wildmenu                   " Display menu instead of auto-complete
+set wildmode=list:longest,full " Tab completion order
+set winminheight=0             " Window can be any size
 
 set list
 set listchars=tab:>\ ,trail:•,extends:#,nbsp:. " Replace special chars in list mode
 
 " Formatting
-set nowrap          " No line wrapping
-set autoindent          " Indent according to previous line
-set shiftwidth=4        " Use 4-spaces indent
-set expandtab           " Tabs are spaces, No thank you tabs
-set tabstop=4           " Indentation is 4 columns
-set softtabstop=4       " Backspace delete indent
-set nojoinspaces        " Don't include space after join
-set splitright          " vsplit to the right of current
-set splitbelow          " hsplit below current
-set pastetoggle=<F12>       " Sane indentation on paste
+set nowrap            " No line wrapping
+set autoindent        " Indent according to previous line
+set shiftwidth=4      " Use 4-spaces indent
+set expandtab         " Tabs are spaces, No thank you tabs
+set tabstop=4         " Indentation is 4 columns
+set softtabstop=4     " Backspace delete indent
+set nojoinspaces      " Don't include space after join
+set splitright        " vsplit to the right of current
+set splitbelow        " hsplit below current
+set pastetoggle=<F12> " Sane indentation on paste
 
 " Remove trailing whitespace
 autocmd FileType c,cpp,java,go,php,javascript,puppet,python,rust,twig,xml,yml,perl,sql autocmd BufWritePre <buffer> | call StripTrailingWhitespace()
@@ -111,9 +112,9 @@ nnoremap <Leader>fu :CtrlPFunky<Cr>
 nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr> " Narrow search to word under cursor
 
 " NERDTree
-map <C-e> <plug>NERDTreeTabsToggle<CR>
-map <leader>e :NERDTreeFind<CR>
-nmap <leader>nt :NERDTreeFind<CR>
+map    <C-e>        <plug>NERDTreeTabsToggle<CR>
+map    <leader>e    :NERDTreeFind<CR>
+nmap   <leader>nt   :NERDTreeFind<CR>
 
 " Tagbar
 nnoremap <silent> <leader>tt :TagbarToggle<Cr>
@@ -122,8 +123,8 @@ nnoremap <silent> <leader>tt :TagbarToggle<Cr>
 nnoremap <Leader>u :UndotreeToggle<CR>
 
 " Remap UltiSnips for compatibility with YouCompleteMe
-let g:UltiSnipsExpandTrigger = '<C-j>'
-let g:UltiSnipsJumpForwardTrigger = '<C-j>'
+let g:UltiSnipsExpandTrigger       = '<C-j>'
+let g:UltiSnipsJumpForwardTrigger  = '<C-j>'
 let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
 
 
