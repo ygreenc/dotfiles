@@ -64,7 +64,8 @@ autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 " Vim UI
 set showmode            " Display active mode
 set cursorline          " Highlight current line
-"colorscheme hybrid
+colorscheme hybrid
+
 if !has('gui_running')
   set t_Co=256
 endif
