@@ -27,3 +27,6 @@ ln -sf "$HOME/.vim/vimrc" "$HOME/.vimrc"
 
 # Download plugins
 vim +PluginInstall
+
+# Create local config
+touch "$HOME/.vimrc.local"
