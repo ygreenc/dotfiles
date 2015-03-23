@@ -24,6 +24,12 @@ set iskeyword-=.          " '.' represents a word
 set iskeyword-=#          " '#' represents a word
 set iskeyword-=-          " '-' represents a word
 
+" Temporary files directories, Double slash prevents name collision
+set backupdir=~/.vim/tmp/backup//,~/.tmp//,/tmp//
+set directory=~/.vim/tmp/swap//,~/.tmp//,/tmp//
+set undodir=~/.vim/undo//,~/.tmp//,/tmp//
+set writebackup
+
 set backspace=indent,eol,start " What to delete on backspace
 set foldenable                 " Auto-fold
 set hlsearch                   " Highlight search term
