@@ -67,15 +67,29 @@
     let g:autoclose_vim_commentmode=1 " Do not autoclose '"' in vimscript
 " }
 
-" Fuzzy finder (file, path, buffer, etc) {
+" CtrlP: Fuzzy finder (file, path, buffer, etc) {
 " http://ctrlpvim.github.io/ctrlp.vim/
     Plugin 'ctrlpvim/ctrlp.vim'
+    let g:ctrlp_working_path_mode = 'ra'
+    let g:ctrlp_custom_ignore ={
+        \ 'dir': '\.(git|hg|svn)$',
+        \ 'file': '\.(so|pyc)$',
+        \ }
+
+    let s:ctrlp_fallback = 'ack %s --nocolor -f'
+     let g:ctrlp_user_command = {
+                \ 'types': {
+                    \ 1: ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others'],
+                    \ 2: ['.hg', 'hg --cwd %s locate -I .'],
+                \ },
+                \ 'fallback': s:ctrlp_fallback
+            \ }
 " }
 
 " Extension to CtrlP, jump to function definition {
 " https://github.com/tacahiroy/ctrlp-funky
     Plugin 'tacahiroy/ctrlp-funky'
-    let g:ctrlp_extensions = ['funky'] 
+    let g:ctrlp_extensions = ['funky']
 " }
 
 " Sublime-like Multiple selections {
@@ -83,15 +97,28 @@
     Plugin 'kristijanhusak/vim-multiple-cursors'
 " }
 
+" Buffer list in statusline {
+" https://github.com/bling/vim-bufferline
+    Plugin 'bling/vim-bufferline'
+    let g:bufferline_active_buffer_left = ''
+    let g:bufferline_active_buffer_right = ''
+" }
+
 " Lighline: Statusline-light {
 " https://github.com/itchyny/lightline.vim
     Plugin 'itchyny/lightline.vim'
     set laststatus=2
-" }
 
-" Buffer list in statusline {
-" https://github.com/bling/vim-bufferline
-    Plugin 'bling/vim-bufferline'
+    let g:lightline = {
+        \ 'active': {
+        \   'left': [ [ 'mode', 'paste'], [ 'filename' ], [ 'bufferline' ] ],
+        \ },
+        \ 'separator': { 'left': '', 'right': '' },
+        \ 'subseparator': { 'left': '', 'right': '' },
+        \ 'component': {
+        \   'bufferline': '%{bufferline#refresh_status()}%{g:bufferline_status_info.before}%#TabLineSel#%{g:bufferline_status_info.current}%#LightLineLeft_active_3#%{g:bufferline_status_info.after}'
+        \ }
+    \ }
 " }
 
 " EasyMotion, Vim motion with highlighting {
