@@ -25,8 +25,22 @@ set iskeyword-=#          " '#' represents a word
 set iskeyword-=-          " '-' represents a word
 
 " Temporary files directories, Double slash prevents name collision
-set backupdir=~/.vim/tmp/backup//,~/.tmp//,/tmp//
-set directory=~/.vim/tmp/swap//,~/.tmp//,/tmp//
+" Backup
+set backupdir=~/.vim/backup
+set backupdir+=~/.vim-backup
+set backupdir+=.
+set backup
+
+" Swap
+set directory=./.vim-swap//
+set directory+=~/.vim/swap//
+set directory+=.
+
+" Undo
+set undodir=./.vim-undo//
+set undodir+=~/.vim/undo//
+set undofile
+
 set undodir=~/.vim/undo//,~/.tmp//,/tmp//
 set writebackup
 
