@@ -163,7 +163,9 @@
 
 " YouCompleteMe: Code-completion engine{
 " http://valloric.github.io/YouCompleteMe/"
-    Plugin 'Valloric/YouCompleteMe'
+    if v:version > 703
+        Plugin 'Valloric/YouCompleteMe'
+    endif
 " }
 
 " UltiSnips: Snippets auto-complete {
