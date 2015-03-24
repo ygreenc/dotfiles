@@ -173,7 +173,7 @@
     Plugin 'honza/vim-snippets'
 " }
 
-" Split window horizontally
+" Split window horizontally {
     let g:UltiSnipsEditSplit="vertical"
 " }
 
@@ -210,4 +210,21 @@
 " GitGutter: Git diff in gutter {
 " https://github.com/airblade/vim-gitgutter
     Plugin 'airblade/vim-gitgutter'
+" }
+
+" Clojure {
+if executable("lein")
+    " fireplace: Clojure REPL {
+    " https://github.com/tpope/vim-fireplace
+        Plugin 'tpope/vim-fireplace'
+    " }
+    " vim-clojure-static: Syntax for clojure {
+    " https://github.com/guns/vim-clojure-static
+        Plugin 'guns/vim-clojure-static'
+    " }
+    " vim-leiningen: Static vim support for Leiningen {
+    " https://github.com/tpope/vim-leiningen
+        Plugin 'tpope/vim-leiningen'
+    " }
+endif
 " }
