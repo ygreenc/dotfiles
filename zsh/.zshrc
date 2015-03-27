@@ -1,5 +1,3 @@
-export PYTHONPATH=/usr/lib/python3.4/site-packages
-
 # Replace oh-my-zsh by Antigen
 # Change default Antigen configuration directory
 export ADOTDIR=${HOME}/.config/zsh/antigen/
