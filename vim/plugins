@@ -1,35 +1,35 @@
 " Plugins definition
-" vim: set sw=4 ts=4 foldmarker={,} foldmethod=marker spell filetype=vim:
+" vim: spell filetype=vim:
 
-" Requirements { 
+" Requirements {{{ 
     set nocompatible
     set background=dark
-" }
+" }}}
 
-" Setup vundle {
+" Setup vundle {{{
     filetype off
     set rtp+=~/.vim/bundle/vundle
     call vundle#rc()
 
-    " Vundle {
+    " Vundle {{{
         Plugin 'gmarik/vundle'
-    " }
-" }
+    " }}}
+" }}}
 
 " Bundle Dependencies
 
-" Vim utility functions {
+" Vim utility functions {{{
     Plugin 'tomtom/tlib_vim'
     Plugin 'MarcWeber/vim-addon-mw-utils'
-" }
+" }}}
 
-" ACK Bundle setup {
+" ACK Bundle setup {{{
     if executable('ack')
         Plugin 'mileszs/ack.vim'
     endif
-" }
+" }}}
 
-" NerdTree {
+" NerdTree {{{
     Plugin 'scrooloose/nerdtree'
     let NERDTreeShowBookmarks=1
     let NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.svn$', '\.bzr$']
@@ -39,35 +39,35 @@
     let NERDTreeShowHidden=1
     let NERDTreeKeepTreeInNewTab=1
     let g:nerdtree_tabs_open_on_gui_startup=0
-" }
+" }}}
 
-" Dark Solarized theme {
+" Dark Solarized theme {{{
 " https://github.com/w0ng/vim-hybrid
     Plugin 'hybrid.vim'
     let g:hybrid_use_Xresources=1
-" }
+" }}}
 
-" Regular Solarized theme {
+" Regular Solarized theme {{{
     Plugin 'altercation/vim-colors-solarized'
-" }
+" }}}
 
-" Color schemes {
+" Color schemes {{{
     Plugin 'spf13/vim-colors'
     Plugin 'flazz/vim-colorschemes'
-" }
+" }}}
 
-" Quote and tags (surroundings) {
+" Quote and tags (surroundings) {{{
 " https://github.com/tpope/vim-surround
     Plugin 'tpope/vim-surround'
-" }
+" }}}
 
-" Automatically close pair-characters {
+" Automatically close pair-characters {{{
 " https://github.com/spf13/vim-autoclose
     Plugin 'spf13/vim-autoclose'
     let g:autoclose_vim_commentmode=1 " Do not autoclose '"' in vimscript
-" }
+" }}}
 
-" CtrlP: Fuzzy finder (file, path, buffer, etc) {
+" CtrlP: Fuzzy finder (file, path, buffer, etc) {{{
 " http://ctrlpvim.github.io/ctrlp.vim/
     Plugin 'ctrlpvim/ctrlp.vim'
     let g:ctrlp_working_path_mode = 'ra'
@@ -84,27 +84,27 @@
                 \ },
                 \ 'fallback': s:ctrlp_fallback
             \ }
-" }
+" }}}
 
-" Extension to CtrlP, jump to function definition {
+" Extension to CtrlP, jump to function definition {{{
 " https://github.com/tacahiroy/ctrlp-funky
     Plugin 'tacahiroy/ctrlp-funky'
     let g:ctrlp_extensions = ['funky']
-" }
+" }}}
 
-" Sublime-like Multiple selections {
+" Sublime-like Multiple selections {{{
 " https://github.com/terryma/vim-multiple-cursors
     Plugin 'kristijanhusak/vim-multiple-cursors'
-" }
+" }}}
 
-" Buffer list in statusline {
+" Buffer list in statusline {{{
 " https://github.com/bling/vim-bufferline
     Plugin 'bling/vim-bufferline'
     let g:bufferline_active_buffer_left = ''
     let g:bufferline_active_buffer_right = ''
-" }
+" }}}
 
-" Lighline: Statusline-light {
+" Lighline: Statusline-light {{{
 " https://github.com/itchyny/lightline.vim
     Plugin 'itchyny/lightline.vim'
     set laststatus=2
@@ -119,117 +119,117 @@
         \   'bufferline': '%{bufferline#refresh_status()}%{g:bufferline_status_info.before}%#TabLineSel#%{g:bufferline_status_info.current}%#LightLineLeft_active_3#%{g:bufferline_status_info.after}'
         \ }
     \ }
-" }
+" }}}
 
-" EasyMotion, Vim motion with highlighting {
+" EasyMotion, Vim motion with highlighting {{{
 " https://github.com/Lokaltog/vim-easymotion
     Plugin 'Lokaltog/vim-easymotion'
-" }
+" }}}
 
-" NERDTree + Tabs fix {
+" NERDTree + Tabs fix {{{
 " https://github.com/jistr/vim-nerdtree-tabs
     Plugin 'jistr/vim-nerdtree-tabs'
-" }
+" }}}
 
-" NERDCommenter: Comments helper {
+" NERDCommenter: Comments helper {{{
 " https://github.com/scrooloose/nerdcommenter
     Plugin 'scrooloose/nerdcommenter'
 " } 
 
-" UndoTree {
+" UndoTree {{{
 " https://github.com/mbbill/undotree
     Plugin 'mbbill/undotree'
     let g:undotree_SetFocusWhenToggle=1
-" }
+" }}}
 
-" Abolish: Easy Substitution {
+" Abolish: Easy Substitution {{{
 " https://github.com/tpope/vim-abolish
     Plugin 'tpope/vim-abolish.git'
-" }
+" }}}
 
-" Tabular: Aligning text {
+" Tabular: Aligning text {{{
 " https://github.com/godlygeek/tabular
     Plugin 'godlygeek/tabular'
-" }
+" }}}
 
-" Tagbar: Class outline {
+" Tagbar: Class outline {{{
 " http://majutsushi.github.io/tagbar
     Plugin 'majutsushi/tagbar'
-" }
+" }}}
 
-" YouCompleteMe: Code-completion engine{
+" YouCompleteMe: Code-completion engine{{{
 " http://valloric.github.io/YouCompleteMe/"
     if v:version > 703
         Plugin 'Valloric/YouCompleteMe'
     endif
-" }
+" }}}
 
-" UltiSnips: Snippets auto-complete {
+" UltiSnips: Snippets auto-complete {{{
     Plugin 'SirVer/ultisnips'
     Plugin 'honza/vim-snippets'
-" }
+" }}}
 
-" Split window horizontally {
+" Split window horizontally {{{
     let g:UltiSnipsEditSplit="vertical"
-" }
+" }}}
 
-" Twig Syntax Highlighting {
+" Twig Syntax Highlighting {{{
 " https://github.com/beyondwords/vim-twig
     Plugin 'beyondwords/vim-twig'
-" }
+" }}}
 
-" HTML-AutoCloseTag: Automatically close html tags {
+" HTML-AutoCloseTag: Automatically close html tags {{{
 " https://github.com/amirh/HTML-AutoCloseTag
     Plugin 'amirh/HTML-AutoCloseTag'
-" }
+" }}}
 
-" CSS3-Syntax: Add CSS3 Syntax highlighting {
+" CSS3-Syntax: Add CSS3 Syntax highlighting {{{
 " https://github.com/hail2u/vim-css3-syntax
     Plugin 'hail2u/vim-css3-syntax'
-" }
+" }}}
 
-" HTML Color preview {
+" HTML Color preview {{{
 " https://github.com/gorodinskiy/vim-coloresque
     Plugin 'gorodinskiy/vim-coloresque'
-" }
+" }}}
 
-" Javascript Syntax Support Enhanced {
+" Javascript Syntax Support Enhanced {{{
 " https://github.com/pangloss/vim-javascript
     Plugin 'pangloss/vim-javascript'
-" }
+" }}}
 
-" Better JSON support {
+" Better JSON support {{{
 " https://github.com/elzr/vim-json
     Plugin 'elzr/vim-json'
-" }
+" }}}
 
-" GitGutter: Git diff in gutter {
+" GitGutter: Git diff in gutter {{{
 " https://github.com/airblade/vim-gitgutter
     Plugin 'airblade/vim-gitgutter'
-" }
+" }}}
 
-" Clojure {
+" Clojure {{{
 if executable("lein")
-    " fireplace: Clojure REPL {
+    " fireplace: Clojure REPL {{{
     " https://github.com/tpope/vim-fireplace
         Plugin 'tpope/vim-fireplace'
-    " }
-    " vim-clojure-static: Syntax for clojure {
+    " }}}
+    " vim-clojure-static: Syntax for clojure {{{
     " https://github.com/guns/vim-clojure-static
         Plugin 'guns/vim-clojure-static'
-    " }
-    " vim-leiningen: Static vim support for Leiningen {
+    " }}}
+    " vim-leiningen: Static vim support for Leiningen {{{
     " https://github.com/tpope/vim-leiningen
         Plugin 'tpope/vim-leiningen'
-    " }
+    " }}}
 endif
-" }
+" }}}
 
-" Racket {
+" Racket {{{
 if executable("racket")
-    " Racket bundle {
+    " Racket bundle {{{
     " https://github.com/wlangstroth/vim-racket
     Plugin 'wlangstroth/vim-racket'
-    " }
+    " }}}
 endif
-" }
+" }}}

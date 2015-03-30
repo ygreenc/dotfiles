@@ -1,4 +1,5 @@
-" Strip whitespace {
+" vim: spell filetype=vim:
+" Strip whitespace {{{
 function! StripTrailingWhitespace()
     " Preparation: save last search, and cursor position.
     let _s=@/
@@ -10,9 +11,9 @@ function! StripTrailingWhitespace()
     let @/=_s
     call cursor(l, c)
 endfunction
-" }
+" }}}
 
-" Shell command {
+" Shell command {{{
 function! s:RunShellCommand(cmdline)
     botright new
 
@@ -33,4 +34,4 @@ endfunction
 
 command! -complete=file -nargs=+ Shell call s:RunShellCommand(<q-args>)
 " e.g. Grep current file for <search_term>: Shell grep -Hn <search_term> %
-" }
+" }}}
