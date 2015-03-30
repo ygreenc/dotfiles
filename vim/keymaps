@@ -1,0 +1,46 @@
+" vim: spell filetype=vim:
+" Keymappings {{{
+    " Leader key {{{
+    let mapleader = ','
+    " }}}
+
+    " Return to normal mode {{{
+    inoremap jk <esc>
+    " }}}
+
+    " Forgot sudo? {{{
+    cmap w!! w !sudo tee % >/dev/null
+    " }}}
+
+    " Edit mode helper {{{
+    cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<cr>
+    map <leader>ew :e   %%
+    map <leader>es :sp  %%
+    map <leader>ev :vsp %%
+    " }}}
+
+    " CtrlP Funky {{{
+    nnoremap <Leader>fu :CtrlPFunky<Cr>
+    nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr> " Narrow search to word under cursor
+    " }}}
+
+    " NERDTree {{{
+    map    <C-e>        <plug>NERDTreeTabsToggle<CR>
+    map    <leader>e    :NERDTreeFind<CR>
+    nmap   <leader>nt   :NERDTreeFind<CR>
+    " }}}
+
+    " Tagbar {{{
+    nnoremap <silent> <leader>tt :TagbarToggle<Cr>
+    " }}}
+
+    " UndoTree {{{
+    nnoremap <Leader>u :UndotreeToggle<CR>
+    " }}}
+
+    " Remap UltiSnips for compatibility with YouCompleteMe {{{
+    let g:UltiSnipsExpandTrigger       = '<C-j>'
+    let g:UltiSnipsJumpForwardTrigger  = '<C-j>'
+    let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
+    " }}}
+" }}}

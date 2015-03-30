@@ -1,20 +1,20 @@
-" vim: set sw=4 ts=4 foldmarker={,} foldmethod=marker spell filetype=vim:
+" vim: spell filetype=vim:
 set nocompatible
 filetype off
 
-" Functions definition {
+" Functions definition {{{
 if filereadable(expand("~/.vim/functions"))
   source ~/.vim/functions
 endif
-" }
+" }}}
 
-" Bundles configurations {
+" Bundles configurations {{{
 if filereadable(expand("~/.vim/plugins"))
   source ~/.vim/plugins
 endif
-" }
+" }}}
 
-" General Settings {
+" General Settings {{{
 filetype plugin indent on " Detect file types
 syntax on                 " Syntax highlighting
 set mouse=""              " I don't want no stinking mouse
@@ -46,32 +46,32 @@ set winminheight=0             " Window can be any size
 
 set list
 set listchars=tab:>\ ,trail:•,extends:#,nbsp:. " Replace special chars in list mode
-" }
+" }}}
 
-" Temporary files directories {
+" Temporary files directories {{{
 " Double slash prevents name collision
-    " Backup {
+    " Backup {{{
     set backupdir=~/.vim/backup
     set backupdir+=~/.vim-backup
     set backupdir+=.
     set backup
     set writebackup
-    " }
+    " }}}
 
-    " Swap {
+    " Swap {{{
     set directory=./.vim-swap//
     set directory+=~/.vim/swap//
     set directory+=.
-    " }
+    " }}}
 
-    " Undo {
+    " Undo {{{
     set undodir=./.vim-undo//
     set undodir+=~/.vim/undo//
     set undofile
-    " }
-" }
+    " }}}
+" }}}
 
-" Formatting {
+" Formatting {{{
 set nowrap            " No line wrapping
 set autoindent        " Indent according to previous line
 set shiftwidth=4      " Use 4-spaces indent
@@ -82,26 +82,35 @@ set nojoinspaces      " Don't include space after join
 set splitright        " vsplit to the right of current
 set splitbelow        " hsplit below current
 set pastetoggle=<F12> " Sane indentation on paste
-" }
+" }}}
 
-" Autocommands {
-" Remove trailing whitespace
-autocmd FileType c,cpp,java,go,php,javascript,puppet,python,rust,twig,xml,yml,perl,sql autocmd BufWritePre <buffer> | call StripTrailingWhitespace()
+" Autocommands {{{
+    " Remove trailing whitespace"{{{
+    autocmd FileType c,cpp,java,go,php,javascript,puppet,python,rust,twig,xml,yml,perl,sql autocmd BufWritePre <buffer> | call StripTrailingWhitespace()
+    " }}}
 
-" Markdown extension is .md
-autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-" }
+    " Markdown filetype {{{
+    autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+    " }}}
 
-" Vim UI {
+    " Vim filetype {{{
+    augroup filetype_vim
+        autocmd!
+        autocmd FileType vim setlocal foldmethod=marker
+    augroup END
+    " }}}
+" }}}
+
+" Vim UI {{{
 set showmode            " Display active mode
 set cursorline          " Highlight current line
 
 if !has('gui_running')
   set t_Co=256
 endif
-" }
+" }}}
 
-" Fix Shift mistakes {
+" Fix Shift mistakes {{{
 if has("user_commands")
     command! -bang -nargs=* -complete=file E  e<bang> <args>
     command! -bang -nargs=* -complete=file W  w<bang> <args>
@@ -113,43 +122,15 @@ if has("user_commands")
     command! -bang QA qa<bang>
     command! -bang Qa qa<bang>
 endif
-" }
+" }}}
 
-" Key mappings {
-let mapleader = ','
+" Key mappings {{{
+if filereadable(expand("~/.vim/keymaps"))
+    source ~/.vim/keymaps
+endif
 
-" Forgot sudo?
-cmap w!! w !sudo tee % >/dev/null
-
-" Edit mode helper
-cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<cr>
-map <leader>ew :e   %%
-map <leader>es :sp  %%
-map <leader>ev :vsp %%
-
-" CtrlP Funky
-nnoremap <Leader>fu :CtrlPFunky<Cr>
-nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr> " Narrow search to word under cursor
-
-" NERDTree
-map    <C-e>        <plug>NERDTreeTabsToggle<CR>
-map    <leader>e    :NERDTreeFind<CR>
-nmap   <leader>nt   :NERDTreeFind<CR>
-
-" Tagbar
-nnoremap <silent> <leader>tt :TagbarToggle<Cr>
-
-" UndoTree
-nnoremap <Leader>u :UndotreeToggle<CR>
-
-" Remap UltiSnips for compatibility with YouCompleteMe
-let g:UltiSnipsExpandTrigger       = '<C-j>'
-let g:UltiSnipsJumpForwardTrigger  = '<C-j>'
-let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
-" }
-
-" Load user configuration {
+" Load user configuration {{{
 if filereadable(expand("~/.vimrc.local"))
   source ~/.vimrc.local
 endif
-" }
+" }}}
