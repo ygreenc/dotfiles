@@ -10,13 +10,13 @@
     filetype off
     set rtp+=~/.vim/bundle/vundle
     call vundle#rc()
+
+    " Vundle {
+        Plugin 'gmarik/vundle'
+    " }
 " }
 
 " Bundle Dependencies
-
-" Vundle {
-    Plugin 'gmarik/vundle'
-" }
 
 " Vim utility functions {
     Plugin 'tomtom/tlib_vim'
@@ -147,10 +147,6 @@
     Plugin 'tpope/vim-abolish.git'
 " }
 
-" over.vim 2.0: Preview changes {
-    Plugin 'osyo-manga/vim-over'
-" }
-
 " Tabular: Aligning text {
 " https://github.com/godlygeek/tabular
     Plugin 'godlygeek/tabular'
@@ -225,6 +221,15 @@ if executable("lein")
     " vim-leiningen: Static vim support for Leiningen {
     " https://github.com/tpope/vim-leiningen
         Plugin 'tpope/vim-leiningen'
+    " }
+endif
+" }
+
+" Racket {
+if executable("racket")
+    " Racket bundle {
+    " https://github.com/wlangstroth/vim-racket
+    Plugin 'wlangstroth/vim-racket'
     " }
 endif
 " }
