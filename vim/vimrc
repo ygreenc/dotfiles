@@ -86,11 +86,15 @@ set pastetoggle=<F12> " Sane indentation on paste
 
 " Autocommands {{{
     " Remove trailing whitespace"{{{
-    autocmd FileType c,cpp,java,go,php,javascript,puppet,python,rust,twig,xml,yml,perl,sql autocmd BufWritePre <buffer> | call StripTrailingWhitespace()
+    augroup trailing_whitespace
+        autocmd FileType c,cpp,java,go,php,javascript,puppet,python,rust,twig,xml,yml,perl,sql autocmd BufWritePre <buffer> | call StripTrailingWhitespace()
+    augroup END
     " }}}
 
     " Markdown filetype {{{
-    autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+    augroup filetype_md
+        autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+    augroup END
     " }}}
 
     " Vim filetype {{{
@@ -128,6 +132,7 @@ endif
 if filereadable(expand("~/.vim/keymaps"))
     source ~/.vim/keymaps
 endif
+" }}}
 
 " Load user configuration {{{
 if filereadable(expand("~/.vimrc.local"))
