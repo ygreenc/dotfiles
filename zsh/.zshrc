@@ -2,6 +2,10 @@
 # Change default Antigen configuration directory
 export ADOTDIR=${HOME}/.config/zsh/antigen/
 
+# Configure default editor
+export VISUAL=vim
+export EDITOR="$VISUAL"
+
 # Load Antigen
 source ${ADOTDIR}/antigen.zsh
 
