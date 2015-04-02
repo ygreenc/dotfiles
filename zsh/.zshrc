@@ -15,11 +15,6 @@ gnu-utils
 symfony2
 vundle
 composer
-git-flow
-pip
-lein
-python
-go
 zsh-users/zsh-completions
 zsh-users/zsh-syntax-highlighting
 EOBUNDLES
