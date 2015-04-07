@@ -173,7 +173,7 @@
 
 " CSS3-Syntax: Add CSS3 Syntax highlighting {{{
 " https://github.com/hail2u/vim-css3-syntax
-    Plug 'hail2u/vim-css3-syntax'
+    Plug 'hail2u/vim-css3-syntax', { 'for': 'css' }
 " }}}
 
 " HTML Color preview {{{
@@ -188,7 +188,7 @@
 
 " Better JSON support {{{
 " https://github.com/elzr/vim-json
-    Plug 'elzr/vim-json'
+    Plug 'elzr/vim-json', { 'for': 'json' }
 " }}}
 
 " GitGutter: Git diff in gutter {{{
@@ -200,11 +200,11 @@
 if executable("lein")
     " fireplace: Clojure REPL {{{
     " https://github.com/tpope/vim-fireplace
-        Plug 'tpope/vim-fireplace'
+        Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
     " }}}
     " vim-clojure-static: Syntax for clojure {{{
     " https://github.com/guns/vim-clojure-static
-        Plug 'guns/vim-clojure-static'
+        Plug 'guns/vim-clojure-static', { 'for': 'clojure'}
     " }}}
     " vim-leiningen: Static vim support for Leiningen {{{
     " https://github.com/tpope/vim-leiningen
@@ -217,7 +217,7 @@ endif
 if executable("racket")
     " Racket bundle {{{
     " https://github.com/wlangstroth/vim-racket
-    Plug 'wlangstroth/vim-racket'
+    Plug 'wlangstroth/vim-racket', { 'for': 'racket' }
     " }}}
 endif
 " }}}
