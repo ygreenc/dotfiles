@@ -1,4 +1,4 @@
-" Plugins definition
+" Plugs definition
 " vim: spell filetype=vim:
 
 " Requirements {{{ 
@@ -8,29 +8,29 @@
 
 " Setup vundle {{{
     filetype off
-    set rtp+=~/.vim/bundle/vundle
-    call vundle#rc()
+    set rtp+=~/.vim/bundle/plug
+    call plug#begin("~/.vim/bundle")
 
-    " Vundle {{{
-        Plugin 'gmarik/vundle'
-    " }}}
+    "" Vundle {{{
+        "Plug 'gmarik/vundle'
+    "" }}}
 " }}}
 
 " Bundle Dependencies
 
 " Vim utility functions {{{
-    Plugin 'tomtom/tlib_vim'
-    Plugin 'MarcWeber/vim-addon-mw-utils'
+    Plug 'tomtom/tlib_vim'
+    Plug 'MarcWeber/vim-addon-mw-utils'
 " }}}
 
 " ACK Bundle setup {{{
     if executable('ack')
-        Plugin 'mileszs/ack.vim'
+        Plug 'mileszs/ack.vim'
     endif
 " }}}
 
 " NerdTree {{{
-    Plugin 'scrooloose/nerdtree'
+    Plug 'scrooloose/nerdtree'
     let NERDTreeShowBookmarks=1
     let NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.svn$', '\.bzr$']
     let NERDTreeChDirMode=0
@@ -43,33 +43,33 @@
 
 " Dark Solarized theme {{{
 " https://github.com/w0ng/vim-hybrid
-    Plugin 'hybrid.vim'
+    Plug 'hybrid.vim'
     let g:hybrid_use_Xresources=1
 " }}}
 
 " Regular Solarized theme {{{
-    Plugin 'altercation/vim-colors-solarized'
+    Plug 'altercation/vim-colors-solarized'
 " }}}
 
 " Color schemes {{{
-    Plugin 'spf13/vim-colors'
-    Plugin 'flazz/vim-colorschemes'
+    Plug 'spf13/vim-colors'
+    Plug 'flazz/vim-colorschemes'
 " }}}
 
 " Quote and tags (surroundings) {{{
 " https://github.com/tpope/vim-surround
-    Plugin 'tpope/vim-surround'
+    Plug 'tpope/vim-surround'
 " }}}
 
 " Automatically close pair-characters {{{
 " https://github.com/spf13/vim-autoclose
-    Plugin 'spf13/vim-autoclose'
+    Plug 'spf13/vim-autoclose'
     let g:autoclose_vim_commentmode=1 " Do not autoclose '"' in vimscript
 " }}}
 
 " CtrlP: Fuzzy finder (file, path, buffer, etc) {{{
 " http://ctrlpvim.github.io/ctrlp.vim/
-    Plugin 'ctrlpvim/ctrlp.vim'
+    Plug 'ctrlpvim/ctrlp.vim'
     let g:ctrlp_working_path_mode = 'ra'
     let g:ctrlp_custom_ignore ={
         \ 'dir': '\.(git|hg|svn)$',
@@ -88,25 +88,25 @@
 
 " Extension to CtrlP, jump to function definition {{{
 " https://github.com/tacahiroy/ctrlp-funky
-    Plugin 'tacahiroy/ctrlp-funky'
+    Plug 'tacahiroy/ctrlp-funky'
     let g:ctrlp_extensions = ['funky']
 " }}}
 
 " Sublime-like Multiple selections {{{
 " https://github.com/terryma/vim-multiple-cursors
-    Plugin 'kristijanhusak/vim-multiple-cursors'
+    Plug 'kristijanhusak/vim-multiple-cursors'
 " }}}
 
 " Buffer list in statusline {{{
 " https://github.com/bling/vim-bufferline
-    Plugin 'bling/vim-bufferline'
+    Plug 'bling/vim-bufferline'
     let g:bufferline_active_buffer_left = ''
     let g:bufferline_active_buffer_right = ''
 " }}}
 
 " Lighline: Statusline-light {{{
 " https://github.com/itchyny/lightline.vim
-    Plugin 'itchyny/lightline.vim'
+    Plug 'itchyny/lightline.vim'
     set laststatus=2
 
     let g:lightline = {
@@ -123,50 +123,50 @@
 
 " EasyMotion, Vim motion with highlighting {{{
 " https://github.com/Lokaltog/vim-easymotion
-    Plugin 'Lokaltog/vim-easymotion'
+    Plug 'Lokaltog/vim-easymotion'
 " }}}
 
 " NERDTree + Tabs fix {{{
 " https://github.com/jistr/vim-nerdtree-tabs
-    Plugin 'jistr/vim-nerdtree-tabs'
+    Plug 'jistr/vim-nerdtree-tabs'
 " }}}
 
 " NERDCommenter: Comments helper {{{
 " https://github.com/scrooloose/nerdcommenter
-    Plugin 'scrooloose/nerdcommenter'
+    Plug 'scrooloose/nerdcommenter'
 " } 
 
 " UndoTree {{{
 " https://github.com/mbbill/undotree
-    Plugin 'mbbill/undotree'
+    Plug 'mbbill/undotree'
     let g:undotree_SetFocusWhenToggle=1
 " }}}
 
 " Abolish: Easy Substitution {{{
 " https://github.com/tpope/vim-abolish
-    Plugin 'tpope/vim-abolish.git'
+    Plug 'tpope/vim-abolish'
 " }}}
 
 " Tabular: Aligning text {{{
 " https://github.com/godlygeek/tabular
-    Plugin 'godlygeek/tabular'
+    Plug 'godlygeek/tabular'
 " }}}
 
 " Tagbar: Class outline {{{
 " http://majutsushi.github.io/tagbar
-    Plugin 'majutsushi/tagbar'
+    Plug 'majutsushi/tagbar'
 " }}}
 
 " YouCompleteMe: Code-completion engine{{{
 " http://valloric.github.io/YouCompleteMe/"
     if v:version > 703
-        Plugin 'Valloric/YouCompleteMe'
+        Plug 'Valloric/YouCompleteMe'
     endif
 " }}}
 
 " UltiSnips: Snippets auto-complete {{{
-    Plugin 'SirVer/ultisnips'
-    Plugin 'honza/vim-snippets'
+    Plug 'SirVer/ultisnips'
+    Plug 'honza/vim-snippets'
 " }}}
 
 " Split window horizontally {{{
@@ -175,52 +175,52 @@
 
 " Twig Syntax Highlighting {{{
 " https://github.com/beyondwords/vim-twig
-    Plugin 'beyondwords/vim-twig'
+    Plug 'beyondwords/vim-twig'
 " }}}
 
 " HTML-AutoCloseTag: Automatically close html tags {{{
 " https://github.com/amirh/HTML-AutoCloseTag
-    Plugin 'amirh/HTML-AutoCloseTag'
+    Plug 'amirh/HTML-AutoCloseTag'
 " }}}
 
 " CSS3-Syntax: Add CSS3 Syntax highlighting {{{
 " https://github.com/hail2u/vim-css3-syntax
-    Plugin 'hail2u/vim-css3-syntax'
+    Plug 'hail2u/vim-css3-syntax'
 " }}}
 
 " HTML Color preview {{{
 " https://github.com/gorodinskiy/vim-coloresque
-    Plugin 'gorodinskiy/vim-coloresque'
+    Plug 'gorodinskiy/vim-coloresque'
 " }}}
 
 " Javascript Syntax Support Enhanced {{{
 " https://github.com/pangloss/vim-javascript
-    Plugin 'pangloss/vim-javascript'
+    Plug 'pangloss/vim-javascript'
 " }}}
 
 " Better JSON support {{{
 " https://github.com/elzr/vim-json
-    Plugin 'elzr/vim-json'
+    Plug 'elzr/vim-json'
 " }}}
 
 " GitGutter: Git diff in gutter {{{
 " https://github.com/airblade/vim-gitgutter
-    Plugin 'airblade/vim-gitgutter'
+    Plug 'airblade/vim-gitgutter'
 " }}}
 
 " Clojure {{{
 if executable("lein")
     " fireplace: Clojure REPL {{{
     " https://github.com/tpope/vim-fireplace
-        Plugin 'tpope/vim-fireplace'
+        Plug 'tpope/vim-fireplace'
     " }}}
     " vim-clojure-static: Syntax for clojure {{{
     " https://github.com/guns/vim-clojure-static
-        Plugin 'guns/vim-clojure-static'
+        Plug 'guns/vim-clojure-static'
     " }}}
     " vim-leiningen: Static vim support for Leiningen {{{
     " https://github.com/tpope/vim-leiningen
-        Plugin 'tpope/vim-leiningen'
+        Plug 'tpope/vim-leiningen'
     " }}}
 endif
 " }}}
@@ -229,7 +229,9 @@ endif
 if executable("racket")
     " Racket bundle {{{
     " https://github.com/wlangstroth/vim-racket
-    Plugin 'wlangstroth/vim-racket'
+    Plug 'wlangstroth/vim-racket'
     " }}}
 endif
 " }}}
+
+call plug#end()
