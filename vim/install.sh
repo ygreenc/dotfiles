@@ -9,9 +9,9 @@ IFS=$'\n\t'
 # Application root
 readonly APP_ROOT=$(pwd)
 
-# Vundle Repository URI
-readonly VUNDLE_URI=${VUNDLE_URI:-"https://github.com/gmarik/vundle.git"}
-readonly VUNDLE_DIR="$HOME/.vim/bundle/vundle"
+# vim-plug File URI
+readonly PLUG_URI=${PLUG_URI:-"https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"}
+readonly PLUG_DIR=${PLUG_DIR:-"$HOME/.vim/bundle/plug/autoload"}
 
 # Backup files
 today=$(date +%Y%m%d_%s)
@@ -22,11 +22,11 @@ today=$(date +%Y%m%d_%s)
 ln -sf "$APP_ROOT" "$HOME/.vim"
 ln -sf "$HOME/.vim/vimrc" "$HOME/.vimrc"
 
-# If vundle dir is not found, clone it
-[ ! -d $VUNDLE_DIR ] && git clone "$VUNDLE_URI" "$HOME/.vim/bundle/vundle"
+# If vim-plug dir is not found, get it
+[ ! -d $PLUG_DIR ] && curl -fLo "$PLUG_DIR/plug.vim" --create-dirs "$PLUG_URI"
 
 # Download plugins
-vim +PluginInstall
+vim +PlugInstall
 
 # Create local config
 touch "$HOME/.vimrc.local"
