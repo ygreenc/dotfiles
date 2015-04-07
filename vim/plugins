@@ -222,4 +222,8 @@ if executable("racket")
 endif
 " }}}
 
+" Lisp-like {{{
+    Plug 'kien/rainbow_parentheses.vim', { 'for': ['clojure', 'racket'] }
+" }}}
+
 call plug#end()

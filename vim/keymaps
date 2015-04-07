@@ -32,6 +32,10 @@
     " UndoTree {{{
     nnoremap <Leader>u :UndotreeToggle<CR>
     " }}}
+    
+    " RainbowParenthesis {{{
+        nnoremap <Leader>) :RainbowParenthesesToggle<cr>
+    " }}}
 
     " Remap UltiSnips for compatibility with YouCompleteMe {{{
     let g:UltiSnipsExpandTrigger       = '<C-j>'
