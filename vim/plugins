@@ -7,8 +7,6 @@
 " }}}
 
 " Setup vim-plug {{{
-    filetype off
-    set rtp+=~/.vim/bundle/plug
     call plug#begin("~/.vim/bundle")
 " }}}
 
