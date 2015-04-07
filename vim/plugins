@@ -6,14 +6,10 @@
     set background=dark
 " }}}
 
-" Setup vundle {{{
+" Setup vim-plug {{{
     filetype off
     set rtp+=~/.vim/bundle/plug
     call plug#begin("~/.vim/bundle")
-
-    "" Vundle {{{
-        "Plug 'gmarik/vundle'
-    "" }}}
 " }}}
 
 " Bundle Dependencies
@@ -86,12 +82,6 @@
             \ }
 " }}}
 
-" Extension to CtrlP, jump to function definition {{{
-" https://github.com/tacahiroy/ctrlp-funky
-    Plug 'tacahiroy/ctrlp-funky'
-    let g:ctrlp_extensions = ['funky']
-" }}}
-
 " Sublime-like Multiple selections {{{
 " https://github.com/terryma/vim-multiple-cursors
     Plug 'kristijanhusak/vim-multiple-cursors'
@@ -160,7 +150,7 @@
 " YouCompleteMe: Code-completion engine{{{
 " http://valloric.github.io/YouCompleteMe/"
     if v:version > 703
-        Plug 'Valloric/YouCompleteMe'
+        Plug 'Valloric/YouCompleteMe', { 'do': './install.sh'}
     endif
 " }}}
 

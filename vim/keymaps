@@ -19,11 +19,6 @@
     map <leader>ev :vsp %%
     " }}}
 
-    " CtrlP Funky {{{
-    nnoremap <Leader>fu :CtrlPFunky<Cr>
-    nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr> " Narrow search to word under cursor
-    " }}}
-
     " NERDTree {{{
     map    <C-e>        <plug>NERDTreeTabsToggle<CR>
     map    <leader>e    :NERDTreeFind<CR>
