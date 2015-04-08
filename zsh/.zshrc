@@ -67,10 +67,10 @@ unsetopt BEEP NOTIFY
 bindkey -v
 
 # Fix up/down arrow history (put cursor at end of line)
-bindkey '\e[A'  up-line-or-history
-bindkey '\e[OA' up-line-or-history
-bindkey '\e[B'  down-line-or-history
-bindkey '\e[OB' down-line-or-history
+bindkey '\e[A' up-line-or-history
+bindkey "\eOA" up-line-or-history
+bindkey '\e[B' down-line-or-history
+bindkey '\eOB' down-line-or-history
 
 # If .zshrc.local exists, source it
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
