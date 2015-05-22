@@ -1,0 +1,280 @@
+# vim:filetype=i3
+# i3 config file (v4)
+# Based on ttps://github.com/Airblader/dotfiles-manjaro
+
+set $mod Mod4
+
+# Define used colors
+set $black       #2c2836
+set $darkblack   #73707e
+set $red         #bb7473
+set $darkred     #cf9fa4
+set $green       #68b782
+set $darkgreen   #9acbad
+set $yellow      #abb773
+set $darkyellow  #c5cba4
+set $blue        #7865c5
+set $darkblue    #a396d9
+set $magenta     #bb65b6
+set $darkmagenta #cf96cf
+set $cyan        #68a8c5
+set $darkcyan    #9ac1d9
+set $white       #f1edfb
+set $darkwhite   #f1edfb
+set $background  #133B47
+
+# Define workspace name
+set $ws1  "1:"
+set $ws2  "2:www"
+set $ws3  "3:"
+set $ws4  "4:rdp"
+set $ws5  "5:"
+set $ws6  "6:"
+set $ws7  "7: 7"
+set $ws8  "8: Firefox"
+set $ws9  "9:"
+set $ws10 "10:"
+
+# Set defaults gap
+set $default_gaps_inner 15
+set $default_gaps_outer 30
+gaps inner $default_gaps_inner
+gaps outer $default_gaps_outer
+
+# Define per-workspace gaps
+workspace $ws2 gaps inner 0
+workspace $ws2 gaps outer 0
+workspace $ws4 gaps inner 0
+workspace $ws4 gaps outer 0
+workspace $ws8 gaps inner 0
+workspace $ws8 gaps outer 0
+workspace $ws9 gaps inner 5
+workspace $ws9 gaps outer 0
+
+workspace_auto_back_and_forth yes
+force_display_urgency_hint 0 ms
+focus_on_window_activation urgent
+
+#                       BORDER     BACKGROUND TEXT   INDICATOR
+client.focused          $cyan      $cyan      $white $cyan
+client.unfocused        $darkcyan  $darkcyan  $white $darkcyan
+client.focused_inactive $darkcyan  $darkcyan  $white $darkcyan
+client.urgent           $red       $red       $white $red
+
+# Resize window (you can also use the mouse for that)
+set $mode_resize    resize
+bindsym $mod+r mode "$mode_resize"
+mode "$mode_resize" {
+        bindsym Left resize shrink width 1 px or 1 ppt
+        bindsym Down resize grow height 1 px or 1 ppt
+        bindsym Up resize shrink height 1 px or 1 ppt
+        bindsym Right resize grow width 1 px or 1 ppt
+
+        bindsym Shift+Left resize shrink width 5 px or 5 ppt
+        bindsym Shift+Down resize grow height 5 px or 5 ppt
+        bindsym Shift+Up resize shrink height 5 px or 5 ppt
+        bindsym Shift+Right resize grow width 5 px or 5 ppt
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+# Locking screen mode
+set $mode_power (l)ock | e(x)it | (s)uspend | (h)ibernate | (r)eboot | (p)oweroff
+mode "$mode_power" {
+        bindsym l mode "default", exec --no-startup-id $HOME/.config/i3/i3exit lock
+        bindsym x mode "default", exec --no-startup-id $HOME/.config/i3/i3exit logout
+        bindsym s mode "default", exec --no-startup-id $HOME/.config/i3/i3exit suspend
+        bindsym h mode "default", exec --no-startup-id $HOME/.config/i3/i3exit hibernate
+        bindsym r mode "default", exec --no-startup-id $HOME/.config/i3/i3exit reboot
+        bindsym p mode "default", exec --no-startup-id $HOME/.config/i3/i3exit shutdown
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+# Gaps modifier mode
+set $mode_gaps Gaps: (o) outer, (i) inner, d|0
+set $mode_gaps_outer Outer Gaps: +|-|d|0 (local), Shift + +|-|d|0 (global)
+set $mode_gaps_inner Inner Gaps: +|-|d|0 (local), Shift + +|-|d|0 (global)
+mode "$mode_gaps" {
+        bindsym o      mode "$mode_gaps_outer"
+        bindsym i      mode "$mode_gaps_inner"
+
+        bindsym 0      mode "default", exec --no-startup-id i3-msg "gaps inner current set 0" && i3-msg "gaps outer current set 0"
+        bindsym d      mode "default", exec --no-startup-id i3-msg "gaps inner current set $default_gaps_inner" && i3-msg "gaps outer current set $default_gaps_outer"
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+mode "$mode_gaps_inner" {
+        bindsym plus  gaps inner current plus 5
+        bindsym minus gaps inner current minus 5
+        bindsym 0     mode "default", gaps inner current set 0
+        bindsym d     mode "default", gaps inner current set $default_gaps_inner
+
+        bindsym Shift+plus  gaps inner all plus 5
+        bindsym Shift+minus gaps inner all minus 5
+        bindsym Shift+0     mode "default", gaps inner all set 0
+        bindsym Shift+d     mode "default", gaps inner all set $default_gaps_inner
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_outer" {
+        bindsym plus  gaps outer current plus 5
+        bindsym minus gaps outer current minus 5
+        bindsym 0     mode "default", gaps outer current set 0
+        bindsym d     mode "default", gaps outer current set $default_gaps_outer
+
+        bindsym Shift+plus  gaps outer all plus 5
+        bindsym Shift+minus gaps outer all minus 5
+        bindsym Shift+0     mode "default", gaps outer all set 0
+        bindsym Shift+d     mode "default", gaps outer all set $default_gaps_outer
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+
+# Keybindings
+floating_modifier $mod
+bindsym $mod+Return exec --no-startup-id urxvt
+bindsym $mod+Shift+Return exec --no-startup-id urxvt -name __scratchpad
+
+# Kill current container
+bindsym $mod+q kill
+
+# Open program menu
+bindsym $mod+Shift+d exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -i -b -l 100 -p "\$" -nb "$background" -nf "$white" -sb "$background" -sf "$cyan"'
+bindsym $mod+d exec --no-startup-id dmenu_run -b -fn '-*-fixed-*-*-*-*-9-*-*-*-*-*-*-*' -nb '#111111' -nf '#555555' -sb '#111111' -sf '#aadb0f'
+
+# Move focus
+bindsym $mod+Left focus left
+bindsym $mod+Right focus right
+bindsym $mod+Up focus up
+bindsym $mod+Down focus down
+
+# Move container 
+bindsym $mod+Shift+Left move left 35px
+bindsym $mod+Shift+Down move down 35px
+bindsym $mod+Shift+Up move up 35px
+bindsym $mod+Shift+Right move right 35px
+
+# Split vertically or horizontally
+bindsym $mod+h split h
+bindsym $mod+v split v
+
+# Toggle fullscreen
+bindsym $mod+f fullscreen
+bindsym $mod+g fullscreen global
+
+# Change tilling layout
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space focus mode_toggle
+
+# Move focus
+bindsym $mod+a focus parent
+bindsym $mod+Shift+a focus child
+
+# Switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+bindsym $mod+Tab workspace back_and_forth
+
+bindsym $mod+Control+Shift+Prior move container to output left
+bindsym $mod+Control+Shift+Next move container to output right
+
+# Move/Display scratchpad
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+Shift+plus scratchpad show
+
+# Move to workspace
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+# Reload config
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+
+# Custom
+bindsym $mod+x [class="rdp"] workspace $ws4,exec --no-startup-id remmina -c ~/.remmina/1432234912581.remmina
+bindsym $mod+i [class="firefox"] workspace $ws8, exec --no-startup-id firefox
+bindsym $mod+n exec --no-startup-id thunar
+
+# Screenshot
+bindsym --release Print exec scrot $HOME/media/screenshot-$(date +%Y-%m-%d_%H-%M-%S).png
+bindsym --release Shift+Print exec scrot -s $HOME/Pictures/screenshot-$(date +%Y-%m-%d_%H-%M-%S).png
+
+# Open lock screen menu
+bindsym $mod+Control+l mode "$mode_power"
+
+# Gaps resizing mode
+bindsym $mod+Shift+g mode "$mode_gaps"
+
+# fix graphics glitch
+new_window none
+
+# dialogs
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [window_role="Preferences"] floating enable
+
+for_window [instance="__scratchpad"] floating enable
+
+# race condition (#1444) :(
+for_window [class="(?i)pavucontrol"] floating enable, exec --no-startup-id "sleep 0.05 && i3-msg '[class=(?i)pavucontrol] move position mouse'"
+
+
+# Assign certain applications to a specific workspace
+assign [class="(?i)chromium"]  $ws2
+assign [class="(?i)firefox"]   $ws8
+assign [class="(?i?remmina)"] $ws4
+
+# Set chromium workspace on the right screen
+workspace $ws2 output DP1
+# Set firefox on the main screen
+workspace $ws8 output VGA1
+
+bar {
+        status_command i3blocks
+        position bottom
+        font pango:Inconsolata, FontAwesome 9
+        strip_workspace_numbers no
+        colors {
+                background          #282828
+                statusline          #ebdbb2
+                separator           #323232
+
+                                    #border backgr. text
+                focused_workspace  #676d3d #676d3d #ebdbb2
+                active_workspace   #323232 #5f676a #ebdbb2
+                inactive_workspace #323232 #323232 #888888
+                urgent_workspace   #333333 #900000 #ffffff
+        }
+}
+
+# AUTOSTART
+exec --no-startup-id dunst &
+exec --no-startup-id feh --bg-fill ~/media/wallpapers/dark_embroidery.png &
