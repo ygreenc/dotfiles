@@ -55,6 +55,11 @@
     Plug 'tpope/vim-surround'
 " }}}
 
+" Expand visual selection {{{
+" https://github.com/terryma/vim-expand-region
+    Plug 'terryma/vim-expand-region'
+" }}}
+
 " Automatically close pair-characters {{{
 " https://github.com/spf13/vim-autoclose
     Plug 'spf13/vim-autoclose'
@@ -147,14 +152,16 @@
 
 " YouCompleteMe: Code-completion engine{{{
 " http://valloric.github.io/YouCompleteMe/"
-    if v:version > 703
-        Plug 'Valloric/YouCompleteMe', { 'do': './install.sh'}
-    endif
+    "if v:version > 703
+        "Plug 'Valloric/YouCompleteMe', { 'do': './install.sh'}
+    "endif
 " }}}
 
 " UltiSnips: Snippets auto-complete {{{
-    Plug 'SirVer/ultisnips'
-    Plug 'honza/vim-snippets'
+    if v:version > 703
+        Plug 'SirVer/ultisnips'
+        Plug 'honza/vim-snippets'
+    endif
 " }}}
 
 " Split window horizontally {{{

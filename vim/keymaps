@@ -8,6 +8,11 @@
     inoremap jk <esc>
     " }}}
 
+    " Expand visual selection {{{
+    vmap v <Plug>(expand_region_expand)
+    vmap <C-v> <Plug>(expan_region_shrink)
+    " }}}
+
     " Forgot sudo? {{{
     cmap w!! w !sudo tee % >/dev/null
     " }}}
