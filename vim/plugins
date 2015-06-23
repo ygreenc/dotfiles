@@ -127,7 +127,7 @@
 " NERDCommenter: Comments helper {{{
 " https://github.com/scrooloose/nerdcommenter
     Plug 'scrooloose/nerdcommenter'
-" } 
+" }}} 
 
 " UndoTree {{{
 " https://github.com/mbbill/undotree
@@ -231,6 +231,11 @@ endif
 
 " Lisp-like {{{
     Plug 'kien/rainbow_parentheses.vim', { 'for': ['clojure', 'racket'] }
+" }}}
+
+" Elixir-lang {{{
+" https://github.com/elixir-lang/vim-elixir
+    Plug 'elixir-lang/vim-elixir'
 " }}}
 
 call plug#end()
