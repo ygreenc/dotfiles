@@ -5,6 +5,8 @@ backup/*
 swap/*
 undo/*
 
+spell
+
 !backup/.gitkeep
 !undo/.gitkeep
 !swap/.gitkeep
