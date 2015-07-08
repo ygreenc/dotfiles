@@ -13,6 +13,9 @@ source ${ADOTDIR}/antigen.zsh
 antigen-use oh-my-zsh
 
 # Load my modules
+# If .zshrc.local exists, source it
+[[ -f ~/.zshrc.bundles ]] && source ~/.zshrc.bundles
+
 antigen-bundles <<EOBUNDLES
 git
 gnu-utils
