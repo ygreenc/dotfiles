@@ -116,7 +116,7 @@ command! -complete=file -nargs=+ Shell call s:RunShellCommand(<q-args>)
         \ 'file': '\.(so|pyc)$',
         \ }
 
-    let s:ctrlp_fallback = 'ack %s --nocolor -f'
+    let s:ctrlp_fallback = 'ag %s --nocolor -f'
      let g:ctrlp_user_command = {
                 \ 'types': {
                     \ 1: ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others'],
@@ -214,6 +214,10 @@ command! -complete=file -nargs=+ Shell call s:RunShellCommand(<q-args>)
     Plug 'beyondwords/vim-twig'
 " }}}
 
+" vim-php-namespace {{{
+    Plug 'arnaud-lb/vim-php-namespace'
+" }}}
+
 " HTML-AutoCloseTag: Automatically close html tags {{{
 " https://github.com/amirh/HTML-AutoCloseTag
     Plug 'amirh/HTML-AutoCloseTag'
@@ -302,9 +306,10 @@ set listchars=tab:>\ ,trail:•,extends:#,nbsp:. " Replace special chars in list
     " }}}
 
     " Undo {{{
-    set undodir=./.vim-undo//
-    set undodir+=~/.vim/undo//
-    set undofile
+    if has("persistent_undo")
+        set undodir=~/.vim/undo//
+        set undofile
+    endif 
     " }}}
 " }}}
 
@@ -404,10 +409,6 @@ endif
     " UndoTree {{{
     nnoremap <Leader>u :UndotreeToggle<CR>
     " }}}
-    
-    " RainbowParenthesis {{{
-    nnoremap <Leader>) :RainbowParenthesesToggle<cr>
-    " }}}
 
     " Remap UltiSnips for compatibility with YouCompleteMe {{{
     let g:UltiSnipsExpandTrigger       = '<C-j>'
@@ -416,8 +417,19 @@ endif
     " }}}
     
     " Strip whitespace {{{
-    nnoremap <F12> :execute StripTrailingWhitespace()<Cr>
+    nnoremap <F10> :execute StripTrailingWhitespace()<Cr>
     " }}}
+
+    " PHP Code style fix {{{
+    nnoremap <F11> :!php-cs-fixer fix %<Cr>
+    " }}}
+    
+    " Multiple theme in case of eye strain   
+    nnoremap <leader>1 :colorscheme obsidian<Cr>
+    nnoremap <leader>2 :colorscheme Tomorrow-Night-Bright<Cr>
+    nnoremap <leader>3 :colorscheme molokai<Cr>
+    nnoremap <leader>4 :colorscheme badwolf<Cr>
+
 " }}}
 
 " Load user configuration {{{
