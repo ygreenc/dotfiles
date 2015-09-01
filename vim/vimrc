@@ -257,6 +257,29 @@ endif
     Plug 'kien/rainbow_parentheses.vim', { 'for': ['clojure', 'racket', 'lisp'] }
 " }}}
 
+" Ruby {{{
+    if !exists('g:disable_ruby_plugins')
+" Awesome Rails navigation {{{
+" https://github.com/tpope/vim-rails
+        Plug 'tpope/vim-rails'
+" }}}
+
+" Lightweight Bundler wrapper {{{
+" https://github.com/tpope/vim-bundler
+        Plug 'tpope/vim-bundler'
+" }}}
+
+" Rake helper {{{
+" https://github.com/tpope/vim-rake
+        Plug 'tpope/rake'
+" }}}
+" Project configuration (rake.vim dependencies) {{{
+" https://github.com/tpope/vim-projectionist
+        Plug 'tpope/projectionist'
+" }}}
+        let g:rubycomplete_buffer_loading = 1
+    endif
+" }}}
 call plug#end()
 " }}}
 
