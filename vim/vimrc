@@ -41,6 +41,11 @@ command! -complete=file -nargs=+ Shell call s:RunShellCommand(<q-args>)
 " }}}
 " }}}
 
+" Load user Pre-Configuration {{{
+if filereadable(expand("~/.vimrc.before"))
+  source ~/.vimrc.before
+endif
+" }}}
 " Plugins {{{ 
 " Requirements {{{ 
     set nocompatible
@@ -193,7 +198,7 @@ command! -complete=file -nargs=+ Shell call s:RunShellCommand(<q-args>)
 
 " YouCompleteMe: Code-completion engine{{{
 " http://valloric.github.io/YouCompleteMe/"
-    if v:version > 703
+    if !exists('g:disable_ycm')
         Plug 'Valloric/YouCompleteMe', { 'do': './install.sh'}
     endif
 " }}}
