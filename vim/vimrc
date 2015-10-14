@@ -46,6 +46,7 @@ if filereadable(expand("~/.vimrc.before"))
   source ~/.vimrc.before
 endif
 " }}}
+
 " Plugins {{{ 
 " Requirements {{{ 
     set nocompatible
@@ -261,24 +262,34 @@ endif
     if !exists('g:disable_ruby_plugins')
 " Awesome Rails navigation {{{
 " https://github.com/tpope/vim-rails
-        Plug 'tpope/vim-rails'
+        Plug 'tpope/vim-rails', { 'for': 'ruby' }
 " }}}
 
 " Lightweight Bundler wrapper {{{
 " https://github.com/tpope/vim-bundler
-        Plug 'tpope/vim-bundler'
+        Plug 'tpope/vim-bundler', { 'for': 'ruby' }
 " }}}
 
 " Rake helper {{{
 " https://github.com/tpope/vim-rake
-        Plug 'tpope/rake'
+        Plug 'https://github.com/tpope/vim-rake.git', { 'for': 'ruby' }
 " }}}
 " Project configuration (rake.vim dependencies) {{{
 " https://github.com/tpope/vim-projectionist
-        Plug 'tpope/projectionist'
+        Plug 'https://github.com/tpope/vim-projectionist.git', { 'for': 'ruby' }
 " }}}
         let g:rubycomplete_buffer_loading = 1
     endif
+" }}}
+
+" Unite: Buffer helper {{{
+"
+    Plug 'shougo/unite.vim'
+" }}}
+
+" autotag: Automatically update ctags {{{
+" https://github.com/craigemery/vim-autotag
+    Plug 'https://github.com/craigemery/vim-autotag.git'
 " }}}
 call plug#end()
 " }}}
