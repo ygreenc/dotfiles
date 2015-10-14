@@ -31,15 +31,15 @@ set $ws4  "4:rdp"
 set $ws5  "5:"
 set $ws6  "6:"
 set $ws7  "7: 7"
-set $ws8  "8: Firefox"
+set $ws8  "8: Palemoon"
 set $ws9  "9:"
 set $ws10 "10:"
 
 # Set defaults gap
-set $default_gaps_inner 15
+set $default_gaps_inner 5
 set $default_gaps_outer 30
-gaps inner $default_gaps_inner
-gaps outer $default_gaps_outer
+#gaps inner $default_gaps_inner
+#gaps outer $default_gaps_outer
 
 # Define per-workspace gaps
 workspace $ws2 gaps inner 0
@@ -97,6 +97,7 @@ mode "$mode_power" {
 set $mode_gaps Gaps: (o) outer, (i) inner, d|0
 set $mode_gaps_outer Outer Gaps: +|-|d|0 (local), Shift + +|-|d|0 (global)
 set $mode_gaps_inner Inner Gaps: +|-|d|0 (local), Shift + +|-|d|0 (global)
+set $mode_marking Focused
 mode "$mode_gaps" {
         bindsym o      mode "$mode_gaps_outer"
         bindsym i      mode "$mode_gaps_inner"
@@ -137,6 +138,35 @@ mode "$mode_gaps_outer" {
         bindsym Escape mode "default"
 }
 
+mode "$mode_marking" {
+    # hardcoded focus keybindings
+    bindsym i [class="(?i)palemoon"] focus
+    bindsym r [class="(?i)chromium" title="Rocket.Chat"] focus
+    bindsym k [class="(?i)keepass"] focus
+    bindsym w [class="(?i)xfreerdp"] focus
+
+    # keybindings for marking and jumping to clients
+    bindsym a exec i3-input -F 'mark %s' -P 'Mark name: '
+    bindsym g exec i3-input -F '[con_mark=%s] focus' -P 'Go to mark: '
+
+    # Assign marks to keys 1-5
+    bindsym Shift+1 mark mark1
+    bindsym Shift+2 mark mark2
+    bindsym Shift+3 mark mark3
+    bindsym Shift+4 mark mark4
+    bindsym Shift+5 mark mark5
+
+    # Jump to clients marked 1-5
+    bindsym 1 [con_mark="mark1"] focus
+    bindsym 2 [con_mark="mark2"] focus
+    bindsym 3 [con_mark="mark3"] focus
+    bindsym 4 [con_mark="mark4"] focus
+    bindsym 5 [con_mark="mark5"] focus
+
+    # Exit to the default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
 
 # Keybindings
 floating_modifier $mod
@@ -147,8 +177,8 @@ bindsym $mod+Shift+Return exec --no-startup-id urxvt -name __scratchpad
 bindsym $mod+q kill
 
 # Open program menu
-bindsym $mod+Shift+d exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -i -b -l 100 -p "\$" -nb "$background" -nf "$white" -sb "$background" -sf "$cyan"'
-bindsym $mod+d exec --no-startup-id dmenu_run -b -fn '-*-fixed-*-*-*-*-9-*-*-*-*-*-*-*' -nb '#111111' -nf '#555555' -sb '#111111' -sf '#aadb0f'
+bindsym $mod+d exec --no-startup-id rofi -show run
+bindsym $mod+Shift+d exec --no-startup-id rofi -show ssh
 
 # Move focus
 bindsym $mod+Left focus left
@@ -165,6 +195,10 @@ bindsym $mod+Shift+Right move right 35px
 # Split vertically or horizontally
 bindsym $mod+h split h
 bindsym $mod+v split v
+
+# Open terminal by splitting
+bindsym $mod+Shift+h split h; exec --no-startup-id urxvt
+bindsym $mod+Shift+v split v; exec --no-startup-id urxvt
 
 # Toggle fullscreen
 bindsym $mod+f fullscreen
@@ -222,9 +256,11 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 
 # Custom
-bindsym $mod+x [class="rdp"] workspace $ws4,exec --no-startup-id remmina -c ~/.remmina/1432234912581.remmina
-bindsym $mod+i [class="firefox"] workspace $ws8, exec --no-startup-id firefox
+bindsym $mod+x [class="rdp"] workspace $ws4,exec --no-startup-id xwin
+bindsym $mod+i [class="palemoon"] workspace $ws8, exec --no-startup-id palemoon
 bindsym $mod+n exec --no-startup-id thunar
+bindsym $mod+b exec --no-startup-id keepass --auto-type
+bindsym $mod+t exec --no-startup-id vncviewer
 
 # Screenshot
 bindsym --release Print exec scrot $HOME/media/screenshot-$(date +%Y-%m-%d_%H-%M-%S).png
@@ -235,6 +271,9 @@ bindsym $mod+Control+l mode "$mode_power"
 
 # Gaps resizing mode
 bindsym $mod+Shift+g mode "$mode_gaps"
+
+# Mark window
+bindsym $mod+m mode "focused"
 
 # fix graphics glitch
 new_window none
@@ -252,12 +291,12 @@ for_window [class="(?i)pavucontrol"] floating enable, exec --no-startup-id "slee
 
 # Assign certain applications to a specific workspace
 assign [class="(?i)chromium"]  $ws2
-assign [class="(?i)firefox"]   $ws8
+assign [class="(?i)palemoon"]   $ws8
 assign [class="(?i?remmina)"] $ws4
 
 # Set chromium workspace on the right screen
 workspace $ws2 output DP1
-# Set firefox on the main screen
+# Set palemoon on the main screen
 workspace $ws8 output VGA1
 
 bar {
@@ -280,4 +319,4 @@ bar {
 
 # AUTOSTART
 exec --no-startup-id dunst &
-exec --no-startup-id feh --bg-fill ~/media/wallpapers/dark_embroidery.png &
+exec --no-startup-id feh --bg-fill /home/yanickc/media/wallpapers/rick_morty_cronenberg.png &
