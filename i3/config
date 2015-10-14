@@ -260,7 +260,13 @@ bindsym $mod+x [class="rdp"] workspace $ws4,exec --no-startup-id xwin
 bindsym $mod+i [class="palemoon"] workspace $ws8, exec --no-startup-id palemoon
 bindsym $mod+n exec --no-startup-id thunar
 bindsym $mod+b exec --no-startup-id keepass --auto-type
-bindsym $mod+t exec --no-startup-id vncviewer
+bindsym $mod+t exec --no-startup-id ~/bin/vnc-dmenu
+bindsym $mod+u exec --no-startup-id teiler
+bindsym $mod+F1 exec --no-startup-id rofi -show run
+bindsym $mod+F2 exec --no-startup-id rofi -show ssh
+bindsym $mod+F3 exec --no-startup-id rofi -show window
+bindsym $mod+F4 exec --no-startup-id rofi -show vnc
+bindsym $mod+F5 exec --no-startup-id teiler
 
 # Screenshot
 bindsym --release Print exec scrot $HOME/media/screenshot-$(date +%Y-%m-%d_%H-%M-%S).png
