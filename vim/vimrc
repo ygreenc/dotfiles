@@ -282,8 +282,16 @@ endif
     endif
 " }}}
 
+" Python {{{
+    if !exists('g:disable_python_plugins')
+" Python-mode {{{ 
+" https://github.com/klen/python-mode
+        Plug 'klen/python-mode'
+" }}}
+    endif
+" }}}
+
 " Unite: Buffer helper {{{
-"
     Plug 'shougo/unite.vim'
 " }}}
 
