@@ -25,14 +25,14 @@ set $background  #133B47
 
 # Define workspace name
 set $ws1  "1:"
-set $ws2  "2:www"
+set $ws2  "2:"
 set $ws3  "3:"
 set $ws4  "4:rdp"
 set $ws5  "5:"
 set $ws6  "6:"
 set $ws7  "7: 7"
 set $ws8  "8: Palemoon"
-set $ws9  "9:"
+set $ws9  "9:www"
 set $ws10 "10:"
 
 # Set defaults gap
@@ -48,7 +48,7 @@ workspace $ws4 gaps inner 0
 workspace $ws4 gaps outer 0
 workspace $ws8 gaps inner 0
 workspace $ws8 gaps outer 0
-workspace $ws9 gaps inner 5
+workspace $ws9 gaps inner 0
 workspace $ws9 gaps outer 0
 
 workspace_auto_back_and_forth yes
@@ -296,12 +296,12 @@ for_window [class="(?i)pavucontrol"] floating enable, exec --no-startup-id "slee
 
 
 # Assign certain applications to a specific workspace
-assign [class="(?i)chromium"]  $ws2
-assign [class="(?i)palemoon"]   $ws8
+assign [class="(?i)chromium"] $ws9
+assign [class="(?i)palemoon"] $ws8
 assign [class="(?i?remmina)"] $ws4
 
 # Set chromium workspace on the right screen
-workspace $ws2 output DP1
+workspace $ws9 output DP1
 # Set palemoon on the main screen
 workspace $ws8 output VGA1
 
@@ -325,4 +325,4 @@ bar {
 
 # AUTOSTART
 exec --no-startup-id dunst &
-exec --no-startup-id feh --bg-fill /home/yanickc/media/wallpapers/rick_morty_cronenberg.png &
+exec --no-startup-id feh --bg-fill $HOME/media/wallpapers/rick_morty_cronenberg.png &
