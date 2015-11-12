@@ -113,25 +113,6 @@ endif
     let g:autoclose_vim_commentmode=1 " Do not autoclose '"' in vimscript
 " }}}
 
-" CtrlP: Fuzzy finder (file, path, buffer, etc) {{{
-" http://ctrlpvim.github.io/ctrlp.vim/
-    Plug 'ctrlpvim/ctrlp.vim'
-    let g:ctrlp_working_path_mode = 'ra'
-    let g:ctrlp_custom_ignore ={
-        \ 'dir': '\.(git|hg|svn)$',
-        \ 'file': '\.(so|pyc)$',
-        \ }
-
-    let s:ctrlp_fallback = 'ag %s --nocolor -f'
-     let g:ctrlp_user_command = {
-                \ 'types': {
-                    \ 1: ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others'],
-                    \ 2: ['.hg', 'hg --cwd %s locate -I .'],
-                \ },
-                \ 'fallback': s:ctrlp_fallback
-            \ }
-" }}}
-
 " Sublime-like Multiple selections {{{
 " https://github.com/terryma/vim-multiple-cursors
     Plug 'kristijanhusak/vim-multiple-cursors'
@@ -156,9 +137,34 @@ endif
         \ 'separator': { 'left': '', 'right': '' },
         \ 'subseparator': { 'left': '', 'right': '' },
         \ 'component': {
-        \   'bufferline': '%{bufferline#refresh_status()}%{g:bufferline_status_info.before}%#TabLineSel#%{g:bufferline_status_info.current}%#LightLineLeft_active_3#%{g:bufferline_status_info.after}'
+        \   'bufferline': '%{bufferline#refresh_status()}%{g:bufferline_status_info.before}%#TabLineSel#%{g:bufferline_status_info.current}%#LightLineLeft_active_3#%{g:bufferline_status_info.after}',
+        \ },
+        \ 'component_function': {
+        \   'filename': 'LightLineFilename'
         \ }
     \ }
+
+    function! LightLineModified()
+        return &ft =~ 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+    endfunction
+
+    function! LightLineReadonly()
+        return &ft !~? 'help' && &readonly ? 'RO' : ''
+    endfunction
+
+    function! LightLineFilename()
+      let fname = expand('%:t')
+      return fname == 'ControlP' ? g:lightline.ctrlp_item :
+            \ fname == '__Tagbar__' ? g:lightline.fname :
+            \ fname =~ '__Gundo\|NERD_tree' ? '' :
+            \ &ft == 'vimfiler' ? vimfiler#get_status_string() :
+            \ &ft == 'unite' ? unite#get_status_string() :
+            \ &ft == 'vimshell' ? vimshell#get_status_string() :
+            \ ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
+            \ ('' != fname ? fname : '[No Name]') .
+            \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
+    endfunction
+    let g:unite_force_overwrite_statusline = 0
 " }}}
 
 " EasyMotion, Vim motion with highlighting {{{
@@ -298,6 +304,12 @@ endif
 
 " Unite: Buffer helper {{{
     Plug 'shougo/unite.vim'
+" }}}
+
+" Vimproc: Interactive cli exec {{{
+" *Requirements of async search unite.vim
+" https://github.com/Shougo/vimproc.vim
+    Plug 'shougo/vimproc.vim', {'do': 'make'}
 " }}}
 
 " autotag: Automatically update ctags {{{
@@ -474,6 +486,12 @@ endif
 
     " PHP Code style fix {{{
     nnoremap <F11> :!php-cs-fixer fix %<Cr>
+    " }}}
+
+    " Unite {{{
+    nnoremap <leader>f :Unite file_rec/async<Cr>
+    nnoremap <leader>b :Unite buffer<Cr>
+    nnoremap <leader>p :Unite file_rec/git<Cr>
     " }}}
     
     " Multiple theme in case of eye strain   
