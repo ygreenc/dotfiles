@@ -306,6 +306,11 @@ endif
     Plug 'shougo/unite.vim'
 " }}}
 
+" vimfiler: A powerful file explorer implemented in Vim script {{{
+" https://github.com/Shougo/vimfiler.vim
+    Plug 'shougo/vimfiler.vim'
+" }}}
+
 " Vimproc: Interactive cli exec {{{
 " *Requirements of async search unite.vim
 " https://github.com/Shougo/vimproc.vim
@@ -459,10 +464,8 @@ endif
     map <leader>ev :vsp %%
     " }}}
 
-    " NERDTree {{{
-    map    <C-e>        <plug>NERDTreeTabsToggle<CR>
-    map    <leader>e    :NERDTreeFind<CR>
-    nmap   <leader>nt   :NERDTreeFind<CR>
+    " Vimfiler {{{
+    map <C-e> :VimFilerExplorer -force-hide<Cr>
     " }}}
 
     " Tagbar {{{
