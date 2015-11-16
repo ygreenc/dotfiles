@@ -1,33 +1,41 @@
 # Replace oh-my-zsh by Antigen
 # Change default Antigen configuration directory
-export ADOTDIR=${HOME}/.config/zsh/antigen/
+source "${HOME}/.config/zsh/zgen/zgen.zsh"
 
 # Configure default editor
 export VISUAL=vim
 export EDITOR="$VISUAL"
 
-# Load Antigen
-source ${ADOTDIR}/antigen.zsh
+# Create an init script if non-existent
+if ! zgen saved; then
+    echo "Creating a zgen save"
 
-# Use oh-my-zsh as base
-antigen-use oh-my-zsh
+    # Use oh-my-zsh as base
+    zgen oh-my-zsh
 
-# Load my modules
-# If .zshrc.local exists, source it
-[[ -f ~/.zshrc.bundles ]] && source ~/.zshrc.bundles
+    # Load my modules
+    # If .zshrc.local exists, source it
+    [[ -f ~/.zshrc.bundles ]] && source ~/.zshrc.bundles
 
-antigen-bundles <<EOBUNDLES
-git
-gnu-utils
-symfony2
-vundle
-composer
-zsh-users/zsh-completions
-zsh-users/zsh-syntax-highlighting
-EOBUNDLES
+    
+    zgen oh-my-zsh plugins/git
+    zgen oh-my-zsh plugins/gnu-utils
+    zgen oh-my-zsh plugins/symfony2
+    zgen oh-my-zsh plugins/vundle
+    zgen oh-my-zsh plugins/composer
 
-antigen-theme mortalscumbag
-antigen-apply
+    zgen load zsh-users/zsh-completions
+    zgen load zsh-users/zsh-syntax-highlighting
+
+    # Apply theme
+    zgen oh-my-zsh themes/crcandy
+
+    # Save script
+    zgen save
+fi
+
+
+
 
 # Keep large history
 HISTFILE=~/.histfile
@@ -81,6 +89,7 @@ bindkey '\eOB' down-line-or-history
 # Send to paste service
 sprunge() { curl -F "sprunge=<-" http://sprunge.us <"$1" ;}
 
+# Send to other paste service
 ix() {
     local opts
     local OPTIND
