@@ -1,4 +1,9 @@
-# Replace oh-my-zsh by Antigen
+# Ensure zgen exists
+ZGENDIR=${ZGENDIR:-${HOME}/.config/zsh/zgen}
+if [[ ! -f "$ZGENDIR/zgen.zsh" ]]; then
+    git clone https://github.com/tarjoilija/zgen.git "$ZGENDIR"
+fi
+
 # Change default Antigen configuration directory
 source "${HOME}/.config/zsh/zgen/zgen.zsh"
 
