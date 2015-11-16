@@ -207,6 +207,7 @@ endif
 " http://valloric.github.io/YouCompleteMe/"
     if !exists('g:disable_ycm')
         Plug 'Valloric/YouCompleteMe', { 'do': './install.py'}
+        let g:ycm_collect_identifiers_from_tags_files = 1
     endif
 " }}}
 
@@ -298,6 +299,8 @@ endif
 " Python-mode {{{ 
 " https://github.com/klen/python-mode
         Plug 'klen/python-mode'
+
+        let g:pymode_virtualenv = 1
 " }}}
     endif
 " }}}
@@ -496,13 +499,17 @@ endif
     nnoremap <leader>b :Unite buffer<Cr>
     nnoremap <leader>p :Unite file_rec/git<Cr>
     " }}}
+
+    " YouCompleteMe  {{{
+    nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<Cr>
+    " }}}
     
     " Multiple theme in case of eye strain   
     nnoremap <leader>1 :colorscheme obsidian<Cr>
     nnoremap <leader>2 :colorscheme Tomorrow-Night-Bright<Cr>
     nnoremap <leader>3 :colorscheme molokai<Cr>
     nnoremap <leader>4 :colorscheme badwolf<Cr>
-
+    nnoremap <leader>5 :colorscheme skittles_berry<Cr>
 " }}}
 
 " Load user configuration {{{
