@@ -498,6 +498,7 @@ endif
     nnoremap <leader>f :Unite file_rec/async<Cr>
     nnoremap <leader>b :Unite buffer<Cr>
     nnoremap <leader>p :Unite file_rec/git<Cr>
+    nnoremap <C-p>     :Unite file_rec/git<Cr>
     " }}}
 
     " YouCompleteMe  {{{
