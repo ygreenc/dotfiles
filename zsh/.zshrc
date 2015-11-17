@@ -79,6 +79,9 @@ setopt CORRECTALL
 # Disable terminal bell
 unsetopt BEEP NOTIFY
 
+# Change timeout on ESC keypress
+export KEYTIMEOUT=1
+
 # vi-style bindings
 bindkey -v
 
@@ -87,6 +90,9 @@ bindkey '\e[A' up-line-or-history
 bindkey "\eOA" up-line-or-history
 bindkey '\e[B' down-line-or-history
 bindkey '\eOB' down-line-or-history
+
+# v in Command mode will open the command in $EDITOR
+bindkey -M vicmd v edit-command-line
 
 # If .zshrc.local exists, source it
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
