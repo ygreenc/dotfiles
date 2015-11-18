@@ -205,9 +205,11 @@ endif
 
 " YouCompleteMe: Code-completion engine{{{
 " http://valloric.github.io/YouCompleteMe/"
-    if !exists('g:disable_ycm')
-        Plug 'Valloric/YouCompleteMe', { 'do': './install.py'}
-        let g:ycm_collect_identifiers_from_tags_files = 1
+    if v:version > 703
+        if !exists('g:disable_ycm')
+            Plug 'Valloric/YouCompleteMe', { 'do': './install.py'}
+            let g:ycm_collect_identifiers_from_tags_files = 1
+        endif
     endif
 " }}}
 
