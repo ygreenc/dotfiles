@@ -56,4 +56,4 @@ rofi.fixed-num-lines: false
 rofi.hmode:           false
 rofi.terminal:        urxvt
 rofi.ssh-set-title:   true
-rofi.modi:            window,run,ssh,vnc:/home/yanickc/bin/rofi/vnc-rofi
+rofi.modi:            window,run,ssh,vnc:$HOME/bin/rofi/vnc-list.sh
