@@ -23,11 +23,21 @@ if ! zgen saved; then
     [[ -f ~/.zshrc.bundles ]] && source ~/.zshrc.bundles
 
     
+    # Dev
     zgen oh-my-zsh plugins/git
     zgen oh-my-zsh plugins/gnu-utils
+    # PHP
     zgen oh-my-zsh plugins/symfony2
     zgen oh-my-zsh plugins/vundle
     zgen oh-my-zsh plugins/composer
+    # Python
+    zgen oh-my-zsh plugins/django
+    zgen oh-my-zsh plugins/pip
+    zgen oh-my-zsh plugins/virtualenv
+    # System
+    zgen oh-my-zsh plugins/systemd
+    zgen oh-my-zsh plugins/themes
+    zgen oh-my-zsh plugins/vi-mode
 
     zgen load zsh-users/zsh-completions
     zgen load zsh-users/zsh-syntax-highlighting
@@ -38,9 +48,6 @@ if ! zgen saved; then
     # Save script
     zgen save
 fi
-
-
-
 
 # Keep large history
 HISTFILE=~/.histfile
