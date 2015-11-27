@@ -70,18 +70,6 @@ endif
     endif
 " }}}
 
-" NerdTree {{{
-    Plug 'scrooloose/nerdtree'
-    let NERDTreeShowBookmarks=1
-    let NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.svn$', '\.bzr$']
-    let NERDTreeChDirMode=0
-    let NERDTreeQuitOnOpen=1
-    let NERDTreeMouseMode=2
-    let NERDTreeShowHidden=1
-    let NERDTreeKeepTreeInNewTab=1
-    let g:nerdtree_tabs_open_on_gui_startup=0
-" }}}
-
 " Dark Solarized theme {{{
 " https://github.com/w0ng/vim-hybrid
     Plug 'hybrid.vim'
@@ -207,7 +195,7 @@ endif
 " http://valloric.github.io/YouCompleteMe/"
     if v:version > 703
         if !exists('g:disable_ycm')
-            Plug 'Valloric/YouCompleteMe', { 'do': './install.py'}
+            Plug 'Valloric/YouCompleteMe', { 'do': 'python2 install.py'}
             let g:ycm_collect_identifiers_from_tags_files = 1
         endif
     endif
