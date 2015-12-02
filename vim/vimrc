@@ -160,11 +160,6 @@ endif
     Plug 'Lokaltog/vim-easymotion'
 " }}}
 
-" NERDTree + Tabs fix {{{
-" https://github.com/jistr/vim-nerdtree-tabs
-    Plug 'jistr/vim-nerdtree-tabs'
-" }}}
-
 " NERDCommenter: Comments helper {{{
 " https://github.com/scrooloose/nerdcommenter
     Plug 'scrooloose/nerdcommenter'
@@ -193,11 +188,12 @@ endif
 
 " YouCompleteMe: Code-completion engine{{{
 " http://valloric.github.io/YouCompleteMe/"
-    if v:version > 703
-        if !exists('g:disable_ycm')
-            Plug 'Valloric/YouCompleteMe', { 'do': 'python2 install.py'}
-            let g:ycm_collect_identifiers_from_tags_files = 1
-        endif
+    if (v:version < 703)
+        let g:disable_ycm = 1
+    endif
+    if !exists('g:disable_ycm')
+        Plug 'Valloric/YouCompleteMe', { 'do': 'python2 install.py'}
+        let g:ycm_collect_identifiers_from_tags_files = 1
     endif
 " }}}
 
@@ -260,41 +256,6 @@ endif
     Plug 'kien/rainbow_parentheses.vim', { 'for': ['clojure', 'racket', 'lisp'] }
 " }}}
 
-" Ruby {{{
-    if !exists('g:disable_ruby_plugins')
-" Awesome Rails navigation {{{
-" https://github.com/tpope/vim-rails
-        Plug 'tpope/vim-rails', { 'for': 'ruby' }
-" }}}
-
-" Lightweight Bundler wrapper {{{
-" https://github.com/tpope/vim-bundler
-        Plug 'tpope/vim-bundler', { 'for': 'ruby' }
-" }}}
-
-" Rake helper {{{
-" https://github.com/tpope/vim-rake
-        Plug 'https://github.com/tpope/vim-rake.git', { 'for': 'ruby' }
-" }}}
-" Project configuration (rake.vim dependencies) {{{
-" https://github.com/tpope/vim-projectionist
-        Plug 'https://github.com/tpope/vim-projectionist.git', { 'for': 'ruby' }
-" }}}
-        let g:rubycomplete_buffer_loading = 1
-    endif
-" }}}
-
-" Python {{{
-    if !exists('g:disable_python_plugins')
-" Python-mode {{{ 
-" https://github.com/klen/python-mode
-        Plug 'klen/python-mode'
-
-        let g:pymode_virtualenv = 1
-" }}}
-    endif
-" }}}
-
 " Unite: Buffer helper {{{
     Plug 'shougo/unite.vim'
 " }}}
@@ -314,6 +275,18 @@ endif
 " https://github.com/craigemery/vim-autotag
     Plug 'https://github.com/craigemery/vim-autotag.git'
 " }}}
+
+" virtualenv: Virtualenv support {{{
+" https://github.com/jmcantrell/vim-virtualenv
+    Plug 'jmcantrell/vim-virtualenv'
+" }}}
+
+" projectroot: Guess project root {{{
+" https://github.com/dbakker/vim-projectroot
+    Plug 'dbakker/vim-projectroot'
+" }}}
+
+
 call plug#end()
 " }}}
 
@@ -485,7 +458,7 @@ endif
     " }}}
 
     " Unite {{{
-    nnoremap <leader>f :Unite file_rec/async<Cr>
+    nnoremap <leader>f :UniteWithProjectDir -start-insert file_rec/async<Cr>
     nnoremap <leader>b :Unite buffer<Cr>
     nnoremap <leader>p :Unite file_rec/git<Cr>
     nnoremap <C-p>     :Unite file_rec/git<Cr>
