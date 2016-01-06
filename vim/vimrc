@@ -209,6 +209,11 @@ endif
     endif
 " }}}
 
+" Ansible syntax {{{
+" https://twitter.com/garrynewman/status/684745966260490240
+    Plug 'chase/vim-ansible-yaml'
+" }}}
+
 " Split window horizontally {{{
     let g:UltiSnipsEditSplit="vertical"
 " }}}
@@ -220,6 +225,10 @@ endif
 
 " vim-php-namespace {{{
     Plug 'arnaud-lb/vim-php-namespace'
+" }}}
+
+" Python mode {{{
+    Plug 'klen/python-mode'
 " }}}
 
 " HTML-AutoCloseTag: Automatically close html tags {{{
