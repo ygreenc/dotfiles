@@ -231,6 +231,11 @@ endif
     Plug 'klen/python-mode'
 " }}}
 
+" Braceless {{{
+" https://github.com/tweekmonster/braceless.vim
+Plug 'tweekmonster/braceless.vim'
+" }}}
+
 " HTML-AutoCloseTag: Automatically close html tags {{{
 " https://github.com/amirh/HTML-AutoCloseTag
     Plug 'amirh/HTML-AutoCloseTag'
