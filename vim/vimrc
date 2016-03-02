@@ -300,6 +300,17 @@ Plug 'tweekmonster/braceless.vim'
     Plug 'dbakker/vim-projectroot'
 " }}}
 
+" rust.vim: Rust syntax highlighting and file detection {{{
+" https://github.com/wting/rust.vim
+Plug 'wting/rust.vim'
+" }}}
+
+" vim-racer: Auto-complete for Rust {{{
+" https://github.com/racer-rust/vim-racer
+Plug 'racer-rust/vim-racer'
+let g:racer_cmd = "~/.cargo/bin/racer"
+let $RUST_SRC_PATH = "/usr/local/src/rust/src"
+" }}}
 
 call plug#end()
 " }}}
