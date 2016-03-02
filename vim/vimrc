@@ -405,6 +405,11 @@ set pastetoggle=<F12> " Sane indentation on paste
         autocmd FileType vim setlocal foldmethod=marker
     augroup END
     " }}}
+
+    " Braceless Settings
+    augroup braceless_settings
+        autocmd FileType python BracelessEnable +indent +highlight
+    augroup END
 " }}}
 
 " Vim UI {{{
