@@ -24,22 +24,22 @@ set $darkwhite   #f1edfb
 set $background  #133B47
 
 # Define workspace name
-set $ws1  "1:"
-set $ws2  "2:"
-set $ws3  "3:"
-set $ws4  "4:rdp"
-set $ws5  "5:"
-set $ws6  "6:"
-set $ws7  "7: 7"
-set $ws8  "8: Palemoon"
-set $ws9  "9:www"
-set $ws10 "10:"
+set $ws1  "1:"
+set $ws2  "2:"
+set $ws3  "3:"
+set $ws4  "4:"
+set $ws5  "5:"
+set $ws6  "6:"
+set $ws7  "7:"
+set $ws8  "8:"
+set $ws9  "9:"
+set $ws10 "10:?"
 
 # Set defaults gap
-set $default_gaps_inner 5
-set $default_gaps_outer 30
-#gaps inner $default_gaps_inner
-#gaps outer $default_gaps_outer
+set $default_gaps_inner 35
+set $default_gaps_outer 0
+gaps inner $default_gaps_inner
+gaps outer $default_gaps_outer
 
 # Define per-workspace gaps
 workspace $ws2 gaps inner 0
@@ -55,6 +55,8 @@ workspace_auto_back_and_forth yes
 force_display_urgency_hint 0 ms
 focus_on_window_activation urgent
 
+for_window [class="^.*"] border pixel 5
+
 #                       BORDER     BACKGROUND TEXT   INDICATOR
 client.focused          $cyan      $cyan      $white $cyan
 client.unfocused        $darkcyan  $darkcyan  $white $darkcyan
@@ -62,7 +64,7 @@ client.focused_inactive $darkcyan  $darkcyan  $white $darkcyan
 client.urgent           $red       $red       $white $red
 
 # Resize window (you can also use the mouse for that)
-set $mode_resize    resize
+set $mode_resize    resize
 bindsym $mod+r mode "$mode_resize"
 mode "$mode_resize" {
         bindsym Left resize shrink width 1 px or 1 ppt
@@ -294,7 +296,6 @@ for_window [instance="__scratchpad"] floating enable
 # race condition (#1444) :(
 for_window [class="(?i)pavucontrol"] floating enable, exec --no-startup-id "sleep 0.05 && i3-msg '[class=(?i)pavucontrol] move position mouse'"
 
-
 # Assign certain applications to a specific workspace
 assign [class="(?i)chromium"] $ws9
 assign [class="(?i)palemoon"] $ws8
@@ -325,4 +326,4 @@ bar {
 
 # AUTOSTART
 exec --no-startup-id dunst &
-exec --no-startup-id feh --bg-fill $HOME/media/wallpapers/rick_morty_cronenberg.png &
+exec --no-startup-id feh --bg-fill $HOME/media/wallpapers/newrings_cassini_big.jpg &
