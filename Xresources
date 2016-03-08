@@ -2,8 +2,7 @@
 
 ! urxvt
 URxvt*intensityStyles:          False 
-URxvt*font:                     xft:Source Code Pro For Powerline:style=Regular:size=10, \
-                                xft:DejaVu Sans Mono for Powerline-10, \
+URxvt*font:                     xft:DejaVu Sans Mono for Powerline-10, \
                                 xft:Hack:style=Regular:size=10, \
                                 xft:Arial:style=Regular
 URxvt*jumpScroll:               True 

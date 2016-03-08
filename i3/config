@@ -1,27 +1,14 @@
 # vim:filetype=i3
 # i3 config file (v4)
-# Based on ttps://github.com/Airblader/dotfiles-manjaro
 
 set $mod Mod4
 
-# Define used colors
-set $black       #2c2836
-set $darkblack   #73707e
-set $red         #bb7473
-set $darkred     #cf9fa4
-set $green       #68b782
-set $darkgreen   #9acbad
-set $yellow      #abb773
-set $darkyellow  #c5cba4
-set $blue        #7865c5
-set $darkblue    #a396d9
-set $magenta     #bb65b6
-set $darkmagenta #cf96cf
-set $cyan        #68a8c5
-set $darkcyan    #9ac1d9
-set $white       #f1edfb
-set $darkwhite   #f1edfb
-set $background  #133B47
+set $bg-color #2f343f
+set $inactive-bg-color #2f343f
+set $text-color #f3f4f5
+set $inactive-text-color #676E7D
+set $urgent-bg-color #E53935
+set $indicator #00ff00
 
 # Define workspace name
 set $ws1  "1:"
@@ -57,11 +44,11 @@ focus_on_window_activation urgent
 
 for_window [class="^.*"] border pixel 5
 
-#                       BORDER     BACKGROUND TEXT   INDICATOR
-client.focused          $cyan      $cyan      $white $cyan
-client.unfocused        $darkcyan  $darkcyan  $white $darkcyan
-client.focused_inactive $darkcyan  $darkcyan  $white $darkcyan
-client.urgent           $red       $red       $white $red
+#                         BORDER               BACKGROUND           TEXT                   INDICATOR
+client.focused            $bg-color            $bg-color            $text-color            $indicator
+client.unfocused          $inactive-bg-color   $inactive-bg-color   $inactive-text-color   $indicator
+client.focused_inactive   $inactive-bg-color   $inactive-bg-color   $inactive-text-color   $indicator
+client.urgent             $urgent-bg-color     $urgent-bg-color     $text-color            $indicator
 
 # Resize window (you can also use the mouse for that)
 set $mode_resize    resize
