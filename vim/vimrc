@@ -341,10 +341,6 @@ set pastetoggle=<F12> " Sane indentation on paste
     augroup END
     " }}}
 
-    " Braceless Settings
-    augroup braceless_settings
-        autocmd FileType python BracelessEnable +indent +highlight
-    augroup END
 " }}}
 
 " Vim UI {{{
@@ -377,11 +373,6 @@ endif
 
     " Return to normal mode {{{
     inoremap jk <esc>
-    " }}}
-
-    " Expand visual selection {{{
-    vmap v <Plug>(expand_region_expand)
-    vmap <C-v> <Plug>(expan_region_shrink)
     " }}}
 
     " Forgot sudo? {{{
