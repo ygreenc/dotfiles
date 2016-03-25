@@ -69,17 +69,6 @@ endif
         Plug 'mileszs/ack.vim'
     endif
 " }}}
-
-" Dark Solarized theme {{{
-" https://github.com/w0ng/vim-hybrid
-    Plug 'hybrid.vim'
-    let g:hybrid_use_Xresources=1
-" }}}
-
-" Regular Solarized theme {{{
-    Plug 'altercation/vim-colors-solarized'
-" }}}
-
 " Color schemes {{{
     Plug 'spf13/vim-colors'
     Plug 'flazz/vim-colorschemes'
@@ -88,11 +77,6 @@ endif
 " Quote and tags (surroundings) {{{
 " https://github.com/tpope/vim-surround
     Plug 'tpope/vim-surround'
-" }}}
-
-" Expand visual selection {{{
-" https://github.com/terryma/vim-expand-region
-    Plug 'terryma/vim-expand-region'
 " }}}
 
 " Automatically close pair-characters {{{
@@ -171,11 +155,6 @@ endif
     let g:undotree_SetFocusWhenToggle=1
 " }}}
 
-" Abolish: Easy Substitution {{{
-" https://github.com/tpope/vim-abolish
-    Plug 'tpope/vim-abolish'
-" }}}
-
 " Tabular: Aligning text {{{
 " https://github.com/godlygeek/tabular
     Plug 'godlygeek/tabular'
@@ -223,37 +202,14 @@ endif
     Plug 'beyondwords/vim-twig'
 " }}}
 
-" vim-php-namespace {{{
-    Plug 'arnaud-lb/vim-php-namespace'
-" }}}
-
-" Python mode {{{
-    Plug 'klen/python-mode'
-" }}}
-
-" Braceless {{{
-" https://github.com/tweekmonster/braceless.vim
-Plug 'tweekmonster/braceless.vim'
-" }}}
-
 " HTML-AutoCloseTag: Automatically close html tags {{{
 " https://github.com/amirh/HTML-AutoCloseTag
     Plug 'amirh/HTML-AutoCloseTag'
 " }}}
 
-" CSS3-Syntax: Add CSS3 Syntax highlighting {{{
-" https://github.com/hail2u/vim-css3-syntax
-    Plug 'hail2u/vim-css3-syntax', { 'for': 'css' }
-" }}}
-
 " HTML Color preview {{{
 " https://github.com/gorodinskiy/vim-coloresque
     Plug 'gorodinskiy/vim-coloresque'
-" }}}
-
-" Javascript Syntax Support Enhanced {{{
-" https://github.com/pangloss/vim-javascript
-    Plug 'pangloss/vim-javascript'
 " }}}
 
 " Better JSON support {{{
@@ -264,10 +220,6 @@ Plug 'tweekmonster/braceless.vim'
 " GitGutter: Git diff in gutter {{{
 " https://github.com/airblade/vim-gitgutter
     Plug 'airblade/vim-gitgutter'
-" }}}
-
-" Lisp-like {{{
-    Plug 'kien/rainbow_parentheses.vim', { 'for': ['clojure', 'racket', 'lisp'] }
 " }}}
 
 " Unite: Buffer helper {{{
@@ -290,26 +242,9 @@ Plug 'tweekmonster/braceless.vim'
     Plug 'https://github.com/craigemery/vim-autotag.git'
 " }}}
 
-" virtualenv: Virtualenv support {{{
-" https://github.com/jmcantrell/vim-virtualenv
-    Plug 'jmcantrell/vim-virtualenv'
-" }}}
-
-" projectroot: Guess project root {{{
-" https://github.com/dbakker/vim-projectroot
-    Plug 'dbakker/vim-projectroot'
-" }}}
-
-" rust.vim: Rust syntax highlighting and file detection {{{
-" https://github.com/wting/rust.vim
-Plug 'wting/rust.vim'
-" }}}
-
-" vim-racer: Auto-complete for Rust {{{
-" https://github.com/racer-rust/vim-racer
-Plug 'racer-rust/vim-racer'
-let g:racer_cmd = "~/.cargo/bin/racer"
-let $RUST_SRC_PATH = "/usr/local/src/rust/src"
+" i3 Vim Syntax {{{
+" https://github.com/PotatoesMaster/i3-vim-syntax
+Plug 'potatoesmaster/i3-vim-syntax'
 " }}}
 
 call plug#end()
