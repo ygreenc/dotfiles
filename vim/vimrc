@@ -104,7 +104,7 @@ endif
 
     let g:lightline = {
         \ 'active': {
-        \   'left': [ [ 'mode', 'paste'], [ 'filename' ], [ 'bufferline' ] ],
+        \   'left': [ [ 'mode', 'paste'], [ 'filename' ], [ 'bufferline' ], [ 'syntastic' ] ],
         \ },
         \ 'separator': { 'left': '', 'right': '' },
         \ 'subseparator': { 'left': '', 'right': '' },
@@ -113,6 +113,12 @@ endif
         \ },
         \ 'component_function': {
         \   'filename': 'LightLineFilename'
+        \ },
+        \ 'component_expand': {
+        \   'syntastic': 'SyntasticStatuslineFlag',
+        \ },
+        \ 'component_type': {
+        \   'syntastic': 'error',
         \ }
     \ }
 
@@ -245,6 +251,16 @@ endif
 " i3 Vim Syntax {{{
 " https://github.com/PotatoesMaster/i3-vim-syntax
 Plug 'potatoesmaster/i3-vim-syntax'
+" }}}
+
+" Syntastic {{{
+" https://github.com/scrooloose/syntastic
+Plug 'scrooloose/syntastic'
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open =1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_php_checkers = ['php']
 " }}}
 
 call plug#end()
