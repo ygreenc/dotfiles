@@ -1,4 +1,4 @@
-#include ".colors/tango"
+#include ".colors/solarized"
 
 ! urxvt
 URxvt*intensityStyles:          False 
@@ -58,4 +58,4 @@ rofi.fixed-num-lines: false
 rofi.hmode:           false
 rofi.terminal:        urxvt
 rofi.ssh-set-title:   true
-rofi.modi:            window,run,ssh,vnc:bin/rofi/vnc-list.sh
+rofi.modi:            window,run,ssh
