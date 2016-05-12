@@ -6,7 +6,7 @@
 
 
 lock() {
-  $HOME/.config/i3lock/i3lock.sh -m blur $HOME/media/perso/logo_sons.png
+  i3lock -c 2d2d31
 }
 
 case "$1" in

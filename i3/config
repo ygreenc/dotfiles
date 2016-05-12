@@ -11,32 +11,16 @@ set $urgent-bg-color #E53935
 set $indicator #00ff00
 
 # Define workspace name
-set $ws1  "1:"
-set $ws2  "2:"
-set $ws3  "3:"
-set $ws4  "4:"
-set $ws5  "5:"
-set $ws6  "6:"
-set $ws7  "7:"
-set $ws8  "8:"
-set $ws9  "9:"
+set $ws1  "1: slack"
+set $ws2  "2: code"
+set $ws3  "3: phpstorm"
+set $ws4  "4: web"
+set $ws5  "5: logs"
+set $ws6  "6:"
+set $ws7  "7:"
+set $ws8  "8:"
+set $ws9  "9:"
 set $ws10 "10:?"
-
-# Set defaults gap
-set $default_gaps_inner 35
-set $default_gaps_outer 0
-gaps inner $default_gaps_inner
-gaps outer $default_gaps_outer
-
-# Define per-workspace gaps
-workspace $ws2 gaps inner 0
-workspace $ws2 gaps outer 0
-workspace $ws4 gaps inner 0
-workspace $ws4 gaps outer 0
-workspace $ws8 gaps inner 0
-workspace $ws8 gaps outer 0
-workspace $ws9 gaps inner 0
-workspace $ws9 gaps outer 0
 
 workspace_auto_back_and_forth yes
 force_display_urgency_hint 0 ms
@@ -77,51 +61,6 @@ mode "$mode_power" {
         bindsym h mode "default", exec --no-startup-id $HOME/.config/i3/i3exit hibernate
         bindsym r mode "default", exec --no-startup-id $HOME/.config/i3/i3exit reboot
         bindsym p mode "default", exec --no-startup-id $HOME/.config/i3/i3exit shutdown
-
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
-
-# Gaps modifier mode
-set $mode_gaps Gaps: (o) outer, (i) inner, d|0
-set $mode_gaps_outer Outer Gaps: +|-|d|0 (local), Shift + +|-|d|0 (global)
-set $mode_gaps_inner Inner Gaps: +|-|d|0 (local), Shift + +|-|d|0 (global)
-set $mode_marking Focused
-mode "$mode_gaps" {
-        bindsym o      mode "$mode_gaps_outer"
-        bindsym i      mode "$mode_gaps_inner"
-
-        bindsym 0      mode "default", exec --no-startup-id i3-msg "gaps inner current set 0" && i3-msg "gaps outer current set 0"
-        bindsym d      mode "default", exec --no-startup-id i3-msg "gaps inner current set $default_gaps_inner" && i3-msg "gaps outer current set $default_gaps_outer"
-
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
-
-mode "$mode_gaps_inner" {
-        bindsym plus  gaps inner current plus 5
-        bindsym minus gaps inner current minus 5
-        bindsym 0     mode "default", gaps inner current set 0
-        bindsym d     mode "default", gaps inner current set $default_gaps_inner
-
-        bindsym Shift+plus  gaps inner all plus 5
-        bindsym Shift+minus gaps inner all minus 5
-        bindsym Shift+0     mode "default", gaps inner all set 0
-        bindsym Shift+d     mode "default", gaps inner all set $default_gaps_inner
-
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
-mode "$mode_gaps_outer" {
-        bindsym plus  gaps outer current plus 5
-        bindsym minus gaps outer current minus 5
-        bindsym 0     mode "default", gaps outer current set 0
-        bindsym d     mode "default", gaps outer current set $default_gaps_outer
-
-        bindsym Shift+plus  gaps outer all plus 5
-        bindsym Shift+minus gaps outer all minus 5
-        bindsym Shift+0     mode "default", gaps outer all set 0
-        bindsym Shift+d     mode "default", gaps outer all set $default_gaps_outer
 
         bindsym Return mode "default"
         bindsym Escape mode "default"
@@ -245,7 +184,6 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 
 # Custom
-bindsym $mod+x [class="rdp"] workspace $ws4,exec --no-startup-id xwin
 bindsym $mod+i [class="palemoon"] workspace $ws8, exec --no-startup-id palemoon
 bindsym $mod+n exec --no-startup-id thunar
 bindsym $mod+b exec --no-startup-id keepass --auto-type
@@ -254,7 +192,6 @@ bindsym $mod+u exec --no-startup-id teiler
 bindsym $mod+F1 exec --no-startup-id rofi -show run
 bindsym $mod+F2 exec --no-startup-id rofi -show ssh
 bindsym $mod+F3 exec --no-startup-id rofi -show window
-bindsym $mod+F4 exec --no-startup-id rofi -show vnc
 bindsym $mod+F5 exec --no-startup-id teiler
 
 # Screenshot
@@ -284,33 +221,25 @@ for_window [instance="__scratchpad"] floating enable
 for_window [class="(?i)pavucontrol"] floating enable, exec --no-startup-id "sleep 0.05 && i3-msg '[class=(?i)pavucontrol] move position mouse'"
 
 # Assign certain applications to a specific workspace
-assign [class="(?i)chromium"] $ws9
-assign [class="(?i)palemoon"] $ws8
-assign [class="(?i?remmina)"] $ws4
+assign [class="(?i)slack"] $ws1
+assign [class="(?i)phpstorm"] $ws3
+assign [class="(?i)chromium"] $ws4
 
 # Set chromium workspace on the right screen
-workspace $ws9 output DP1
-# Set palemoon on the main screen
-workspace $ws8 output VGA1
+#workspace $ws9 output DP1
+workspace $ws1 output VIRTUAL1
+workspace $ws2 output EDP1
+workspace $ws3 output EDP1
+workspace $ws4 output DP1
+workspace $ws5 output VIRTUAL1
 
 bar {
-        status_command i3blocks
-        position bottom
-        font pango:Inconsolata, FontAwesome 9
-        strip_workspace_numbers no
-        colors {
-                background          #282828
-                statusline          #ebdbb2
-                separator           #323232
-
-                                    #border backgr. text
-                focused_workspace  #676d3d #676d3d #ebdbb2
-                active_workspace   #323232 #5f676a #ebdbb2
-                inactive_workspace #323232 #323232 #888888
-                urgent_workspace   #333333 #900000 #ffffff
-        }
+    status_command          python   ~/.dotfiles/bin/status.py
+    position                bottom
+    strip_workspace_numbers no
+    workspace_buttons       yes
 }
 
 # AUTOSTART
 exec --no-startup-id dunst &
-exec --no-startup-id feh --bg-fill $HOME/media/wallpapers/newrings_cassini_big.jpg &
+exec --no-startup-id feh --bg-fill $HOME/Media/img/saturn_shadow.png &
