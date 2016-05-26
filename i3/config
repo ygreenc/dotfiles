@@ -29,10 +29,6 @@ focus_on_window_activation urgent
 for_window [class="^.*"] border pixel 5
 
 #                         BORDER               BACKGROUND           TEXT                   INDICATOR
-client.focused            $bg-color            $bg-color            $text-color            $indicator
-client.unfocused          $inactive-bg-color   $inactive-bg-color   $inactive-text-color   $indicator
-client.focused_inactive   $inactive-bg-color   $inactive-bg-color   $inactive-text-color   $indicator
-client.urgent             $urgent-bg-color     $urgent-bg-color     $text-color            $indicator
 
 # Resize window (you can also use the mouse for that)
 set $mode_resize    resize
@@ -185,7 +181,7 @@ bindsym $mod+Shift+r restart
 
 # Custom
 bindsym $mod+i [class="palemoon"] workspace $ws8, exec --no-startup-id palemoon
-bindsym $mod+n exec --no-startup-id thunar
+bindsym $mod+n exec --no-startup-id spacefm
 bindsym $mod+b exec --no-startup-id keepass --auto-type
 bindsym $mod+t exec --no-startup-id ~/bin/vnc-dmenu
 bindsym $mod+u exec --no-startup-id teiler
@@ -225,21 +221,32 @@ assign [class="(?i)slack"] $ws1
 assign [class="(?i)phpstorm"] $ws3
 assign [class="(?i)chromium"] $ws4
 
-# Set chromium workspace on the right screen
-#workspace $ws9 output DP1
+# EDP1 = Left screen
+# HDMI2 = Right screen
+# VIRTUAL1 = Laptop screen
 workspace $ws1 output VIRTUAL1
-workspace $ws2 output EDP1
-workspace $ws3 output EDP1
-workspace $ws4 output DP1
+workspace $ws2 output HDMI2
+workspace $ws3 output HDMI2
+workspace $ws4 output EDP1
 workspace $ws5 output VIRTUAL1
 
 bar {
-    status_command          python   ~/.dotfiles/bin/status.py
+  status_command          python   ~/.dotfiles/bin/status.py
     position                bottom
     strip_workspace_numbers no
     workspace_buttons       yes
+  colors {
+    statusline #AAAAAA
+    background #333333
+    focused_workspace #282828 #282828 #FFFFFF
+    inactive_workspace #333333 #333333 #AAAAAA
+  }
 }
 
 # AUTOSTART
-exec --no-startup-id dunst &
+exec --no-startup-id dunst -config ~/.config/i3/dunstrc &
 exec --no-startup-id feh --bg-fill $HOME/Media/img/saturn_shadow.png &
+
+client.unfocused #333333 #333333 #FFFFFF #333333
+client.focused_inactive #333333 #333333 #FFFFFF #000000
+client.focused #000000 #000000 #FFFFFF #000000
