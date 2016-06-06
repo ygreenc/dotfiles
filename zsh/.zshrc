@@ -43,7 +43,7 @@ if ! zgen saved; then
     zgen load zsh-users/zsh-syntax-highlighting
 
     # Apply theme
-    zgen oh-my-zsh themes/crcandy
+    zgen oh-my-zsh themes/dst
 
     # Save script
     zgen save
