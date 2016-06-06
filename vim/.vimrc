@@ -173,13 +173,13 @@ endif
 
 " YouCompleteMe: Code-completion engine{{{
 " http://valloric.github.io/YouCompleteMe/"
-    "if (v:version < 703)
-        "let g:disable_ycm = 1
-    "endif
-    "if !exists('g:disable_ycm')
-        "Plug 'Valloric/YouCompleteMe', { 'do': 'python2 install.py'}
-        "let g:ycm_collect_identifiers_from_tags_files = 1
-    "endif
+	if (v:version < 703)
+		let g:disable_ycm = 1
+	endif
+	if !exists('g:disable_ycm')
+		Plug 'Valloric/YouCompleteMe', { 'do': 'python install.py'}
+		let g:ycm_collect_identifiers_from_tags_files = 1
+	endif
 " }}}
 
 " VimShell: Shell written in vimscript {{{
