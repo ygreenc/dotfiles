@@ -263,6 +263,10 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_php_checkers = ['php']
 " }}}
 
+" SuperTab {{{
+" https://github.com/ervandew/supertab
+Plug 'ervandew/supertab'
+" }}}
 call plug#end()
 " }}}
 
