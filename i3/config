@@ -189,6 +189,7 @@ bindsym $mod+F1 exec --no-startup-id rofi -show run
 bindsym $mod+F2 exec --no-startup-id rofi -show ssh
 bindsym $mod+F3 exec --no-startup-id rofi -show window
 bindsym $mod+F5 exec --no-startup-id teiler
+bindsym $mod+p exec --no-startup-id autorandr --change --default mobile
 
 # Screenshot
 bindsym --release Print exec scrot $HOME/media/screenshot-$(date +%Y-%m-%d_%H-%M-%S).png
@@ -246,6 +247,7 @@ bar {
 # AUTOSTART
 exec --no-startup-id dunst -config ~/.config/i3/dunstrc &
 exec --no-startup-id feh --bg-fill $HOME/Media/img/saturn_shadow.png &
+exec --no-startup-id autorandr --change --default mobile
 
 client.unfocused #333333 #333333 #FFFFFF #333333
 client.focused_inactive #333333 #333333 #FFFFFF #000000
