@@ -267,6 +267,16 @@ let g:syntastic_php_checkers = ['php']
 " https://github.com/ervandew/supertab
 Plug 'ervandew/supertab'
 " }}}
+
+" Nix syntax file {{{
+"
+Plug 'spwhitt/vim-nix'
+" }}}
+
+" PHP debugger {{{
+" https://github.com/joonty/vdebug
+Plug 'joonty/vdebug'
+" }}}
 call plug#end()
 " }}}
 

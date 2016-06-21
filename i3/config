@@ -226,11 +226,11 @@ assign [class="(?i)chromium"] $ws4
 # EDP1 = Left screen
 # HDMI2 = Right screen
 # VIRTUAL1 = Laptop screen
-workspace $ws1 output VIRTUAL1
-workspace $ws2 output HDMI2
-workspace $ws3 output HDMI2
-workspace $ws4 output EDP1
-workspace $ws5 output VIRTUAL1
+#workspace $ws1 output VIRTUAL1
+#workspace $ws2 output HDMI2
+#workspace $ws3 output HDMI2
+#workspace $ws4 output EDP1
+#workspace $ws5 output VIRTUAL1
 
 bar {
   status_command          python   ~/.dotfiles/bin/status.py
