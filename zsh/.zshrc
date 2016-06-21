@@ -11,6 +11,9 @@ source "${HOME}/.config/zsh/zgen/zgen.zsh"
 export VISUAL=vim
 export EDITOR="$VISUAL"
 
+# Disable zsh auto update
+DISABLE_AUTO_UPDATE=true
+
 # Create an init script if non-existent
 if ! zgen saved; then
     echo "Creating a zgen save"
