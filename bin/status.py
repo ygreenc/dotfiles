@@ -42,4 +42,6 @@ status.register('backlight',
         format='Brightness: {percentage}',
         base_path='/sys/class/backlight/intel_backlight/',)
 
+status.register('spotify')
+
 status.run()
