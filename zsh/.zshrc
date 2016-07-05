@@ -12,6 +12,7 @@ export VISUAL=vim
 export EDITOR="$VISUAL"
 
 # Disable zsh auto update
+DISABLE_UPDATE_PROMPT=true
 DISABLE_AUTO_UPDATE=true
 
 # Create an init script if non-existent
