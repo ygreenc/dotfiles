@@ -106,7 +106,9 @@ bindsym $mod+Shift+d exec --no-startup-id rofi -show ssh
 
 # Move focus
 bindsym $mod+Left focus left
+bindsym $mod+h focus left
 bindsym $mod+Right focus right
+bindsym $mod+l focus right
 bindsym $mod+Up focus up
 bindsym $mod+Down focus down
 
@@ -117,8 +119,8 @@ bindsym $mod+Shift+Up move up 35px
 bindsym $mod+Shift+Right move right 35px
 
 # Split vertically or horizontally
-bindsym $mod+h split h
-bindsym $mod+v split v
+#bindsym $mod+h split h
+#bindsym $mod+v split v
 
 # Open terminal by splitting
 bindsym $mod+Shift+h split h; exec --no-startup-id urxvt
@@ -173,7 +175,7 @@ bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
 # Lock session
-bindsym $mod+l exec --no-startup-id $HOME/.config/i3/i3exit lock
+bindsym $mod+Shift+l exec --no-startup-id $HOME/.config/i3/i3exit lock
 
 # Reload config
 bindsym $mod+Shift+c reload
@@ -185,7 +187,7 @@ bindsym $mod+b exec --no-startup-id keepass --auto-type
 bindsym $mod+F1 exec --no-startup-id rofi -show run
 bindsym $mod+F2 exec --no-startup-id rofi -show ssh
 bindsym $mod+F3 exec --no-startup-id rofi -show window
-bindsym $mod+F5 exec --no-startup-id teiler
+bindsym $mod+F5 exec --no-startup-id shutter -s
 
 # Spotify
 bindsym $mod+p exec --no-startup-id dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
@@ -193,8 +195,7 @@ bindsym $mod+o exec --no-startup-id dbus-send --print-reply --dest=org.mpris.Med
 bindsym $mod+i exec --no-startup-id dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
 
 # Screenshot
-bindsym --release Print exec scrot $HOME/media/screenshot-$(date +%Y-%m-%d_%H-%M-%S).png
-bindsym --release Shift+Print exec scrot -s $HOME/Pictures/screenshot-$(date +%Y-%m-%d_%H-%M-%S).png
+bindsym --release Print exec shutter -s
 
 # Open lock screen menu
 bindsym $mod+Control+l mode "$mode_power"
@@ -248,7 +249,8 @@ bar {
 # AUTOSTART
 exec --no-startup-id dunst -config ~/.config/i3/dunstrc &
 exec --no-startup-id feh --bg-fill $HOME/Media/img/saturn_shadow.png &
-exec --no-startup-id autorandr --change --default mobile
+exec --no-startup-id autorandr --change --default work2 &
+exec --no-startup-id dropbox &
 
 client.unfocused #333333 #333333 #FFFFFF #333333
 client.focused_inactive #333333 #333333 #FFFFFF #000000
