@@ -26,28 +26,29 @@ if ! zgen saved; then
     # If .zshrc.local exists, source it
     [[ -f ~/.zshrc.bundles ]] && source ~/.zshrc.bundles
 
-    
     # Dev
     zgen oh-my-zsh plugins/git
     zgen oh-my-zsh plugins/gnu-utils
     # PHP
-    zgen oh-my-zsh plugins/symfony2
-    zgen oh-my-zsh plugins/vundle
     zgen oh-my-zsh plugins/composer
     # Python
-    zgen oh-my-zsh plugins/django
     zgen oh-my-zsh plugins/pip
     zgen oh-my-zsh plugins/virtualenv
     # System
     zgen oh-my-zsh plugins/systemd
     zgen oh-my-zsh plugins/themes
     zgen oh-my-zsh plugins/vi-mode
+    zgen oh-my-zsh plugins/kubectl
 
     zgen load zsh-users/zsh-completions
     zgen load zsh-users/zsh-syntax-highlighting
+    zgen load lukechilds/zsh-nvm
+    zgen load laurenkt/zsh-vimto
+    zgen load digitalocean/doctl
 
     # Apply theme
-    zgen oh-my-zsh themes/dst
+    zgen oh-my-zsh themes/risto
+
 
     # Save script
     zgen save
@@ -59,7 +60,8 @@ HISTSIZE=1000000
 SAVEHIST=1000000
 
 # Append to history file instead of truncating
-setopt APPEND_HISTORY
+setopt INC_APPEND_HISTORY_TIME
+
 # Automatically cd to directory
 setopt AUTO_CD
 
@@ -69,23 +71,29 @@ setopt EXTENDED_GLOB
 # Display an error if pattern has no matches
 setopt NOMATCH
 
-# Share history between sessions
-setopt SHARE_HISTORY
-
 # Prefix timestamp to command in history file
 setopt EXTENDED_HISTORY
 
-# Do not append command to history if the same as previous one
-setopt HIST_IGNORE_DUPS
+# When trimming histfile, remove duplicate first
+setopt HIST_EXPIRE_DUPS_FIRST
 
 # When searching history, don't display duplicates
 setopt HIST_FIND_NO_DUPS
 
 # Allow comments even in shell
-setopt INTERACTIVECOMMENTS
+setopt INTERACTIVE_COMMENTS
 
 # Try to correct spelling of arguments
 setopt CORRECTALL
+
+# Automatically list choices on an ambiguous completion
+setopt AUTO_LIST
+
+# When word contains glob pattern, list through values
+setopt GLOB_COMPLETE
+
+# If a pattern for filename generation is badly formed, print an error message
+setopt BAD_PATTERN
 
 # Disable terminal bell
 unsetopt BEEP NOTIFY
@@ -110,6 +118,9 @@ bindkey -M vicmd v edit-command-line
 
 # Send to paste service
 sprunge() { curl -F "sprunge=<-" http://sprunge.us <"$1" ;}
+
+# Grab current tmux layout
+tmux-current-layout () { tmux list-windows -F "#{window_active} #{window_layout}" | grep "^1" | cut -d " " -f 2 }
 
 # Send to other paste service
 ix() {
@@ -183,3 +194,8 @@ transfer() {
     # cleanup
     rm -f $tmpfile
 }
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+# added by travis gem
+[ -f /home/ychateauvert/.travis/travis.sh ] && source /home/ychateauvert/.travis/travis.sh

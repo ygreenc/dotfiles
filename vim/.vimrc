@@ -72,7 +72,18 @@ endif
 " Color schemes {{{
     Plug 'spf13/vim-colors'
     Plug 'flazz/vim-colorschemes'
+    Plug 'jacoborus/tender'
 " }}}
+" Neomake {{{
+" https://github.com/neomake/neomake
+	Plug 'neomake/neomake'
+" }}}
+
+" Multiple filetype definition
+    Plug 'sheerun/vim-polyglot'
+
+" Elixir integration
+    Plug 'slashmili/alchemist.vim'
 
 " Quote and tags (surroundings) {{{
 " https://github.com/tpope/vim-surround
@@ -136,13 +147,13 @@ endif
             \ fname == '__Tagbar__' ? g:lightline.fname :
             \ fname =~ '__Gundo\|NERD_tree' ? '' :
             \ &ft == 'vimfiler' ? vimfiler#get_status_string() :
-            \ &ft == 'unite' ? unite#get_status_string() :
+            \ &ft == 'unite' ? unite() :
             \ &ft == 'vimshell' ? vimshell#get_status_string() :
             \ ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
             \ ('' != fname ? fname : '[No Name]') .
             \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
     endfunction
-    let g:unite_force_overwrite_statusline = 0
+    let g:unite = 0
 " }}}
 
 " EasyMotion, Vim motion with highlighting {{{
@@ -173,12 +184,19 @@ endif
 
 " YouCompleteMe: Code-completion engine{{{
 " http://valloric.github.io/YouCompleteMe/"
-	if (v:version < 703)
-		let g:disable_ycm = 1
-	endif
-	if !exists('g:disable_ycm')
-		Plug 'Valloric/YouCompleteMe', { 'do': 'python install.py'}
-		let g:ycm_collect_identifiers_from_tags_files = 1
+	if has('nvim')
+		Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+		let g:deoplete#enable_at_startup = 1
+
+		Plug 'zchee/deoplete-jedi'
+	else
+		if (v:version < 703)
+			let g:disable_ycm = 1
+		endif
+		if !exists('g:disable_ycm')
+			Plug 'Valloric/YouCompleteMe', { 'do': 'python install.py'}
+			let g:ycm_collect_identifiers_from_tags_files = 1
+		endif
 	endif
 " }}}
 
@@ -194,11 +212,6 @@ endif
     endif
 " }}}
 
-" Ansible syntax {{{
-" https://twitter.com/garrynewman/status/684745966260490240
-    Plug 'chase/vim-ansible-yaml'
-" }}}
-
 " Split window horizontally {{{
     let g:UltiSnipsEditSplit="vertical"
 " }}}
@@ -206,11 +219,6 @@ endif
 " Twig Syntax Highlighting {{{
 " https://github.com/beyondwords/vim-twig
     Plug 'beyondwords/vim-twig'
-" }}}
-
-" HTML-AutoCloseTag: Automatically close html tags {{{
-" https://github.com/amirh/HTML-AutoCloseTag
-    Plug 'amirh/HTML-AutoCloseTag'
 " }}}
 
 " HTML Color preview {{{
@@ -245,7 +253,7 @@ endif
 
 " autotag: Automatically update ctags {{{
 " https://github.com/craigemery/vim-autotag
-    Plug 'https://github.com/craigemery/vim-autotag.git'
+    "Plug 'https://github.com/craigemery/vim-autotag.git'
 " }}}
 
 " i3 Vim Syntax {{{
@@ -268,15 +276,21 @@ let g:syntastic_php_checkers = ['php']
 Plug 'ervandew/supertab'
 " }}}
 
-" Nix syntax file {{{
-"
-Plug 'spwhitt/vim-nix'
+"Plug 'tpope/vim-fireplace'
+"Plug 'guns/vim-clojure-static'
+"Plug 'guns/vim-clojure-highlight'
+Plug 'kien/rainbow_parentheses.vim'
+
+" Golang support {{{
+" https://github.com/fatih/vim-go
+Plug 'fatih/vim-go'
 " }}}
 
-" PHP debugger {{{
-" https://github.com/joonty/vdebug
-Plug 'joonty/vdebug'
+" docker-compose syntax {{{
+" https://github.com/ekalinin/Dockerfile.vim
+Plug 'ekalinin/Dockerfile.vim'
 " }}}
+
 call plug#end()
 " }}}
 
@@ -434,7 +448,7 @@ endif
     let g:UltiSnipsJumpForwardTrigger  = '<C-j>'
     let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
     " }}}
-    
+
     " Strip whitespace {{{
     nnoremap <F10> :execute StripTrailingWhitespace()<Cr>
     " }}}
@@ -453,7 +467,11 @@ endif
     " YouCompleteMe  {{{
     nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<Cr>
     " }}}
-    
+
+    " ctags {{{
+    map <silent> <Leader>rt :!ruby-retag<Cr>
+    " }}}
+
     " Multiple theme in case of eye strain   
     nnoremap <leader>1 :colorscheme obsidian<Cr>
     nnoremap <leader>2 :colorscheme Tomorrow-Night-Bright<Cr>

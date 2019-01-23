@@ -1,1 +1,1 @@
-vimrc
+/home/ychateauvert/.vimrc
