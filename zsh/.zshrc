@@ -39,6 +39,9 @@ if ! zgen saved; then
     zgen oh-my-zsh plugins/themes
     zgen oh-my-zsh plugins/vi-mode
     zgen oh-my-zsh plugins/kubectl
+    zgen oh-my-zsh plugins/rclone
+
+    zgen load leophys/zsh-plugin-fzf-finder
 
     zgen load zsh-users/zsh-completions
     zgen load zsh-users/zsh-syntax-highlighting
@@ -47,8 +50,7 @@ if ! zgen saved; then
     zgen load digitalocean/doctl
 
     # Apply theme
-    zgen oh-my-zsh themes/risto
-
+    zgen oh-my-zsh themes/tonotdo
 
     # Save script
     zgen save
@@ -194,8 +196,3 @@ transfer() {
     # cleanup
     rm -f $tmpfile
 }
-
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-
-# added by travis gem
-[ -f /home/ychateauvert/.travis/travis.sh ] && source /home/ychateauvert/.travis/travis.sh
