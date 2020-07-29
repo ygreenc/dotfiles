@@ -203,4 +203,34 @@ transfer() {
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+alias dco=docker-compose
+alias k=kubectl
+
+fda() {
+  local dir
+  dir=$(find ${1:-.} -type d 2> /dev/null | fzf +m) && cd "$dir"
+}
+
+fcode() {
+  local dir
+  dir=$(find ~/src -maxdepth 1 -type d -printf '%f\n' | fzf +m)
+
+  cd "$HOME/src/$dir"
+}
+
+uniqx() {
+  awk '{ if (!h[$0]) { print $0; h[$0]=1 } }'
+}
+
+fh() {
+  print -z $( ([ -n "$ZSH_NAME" ] && fc -ln 1 || history) | fzf +s --tac | sed -r 's/ *[0-9]*\*? *//' | sed -r 's/\\/\\\\/g')
+}
+
+alias git-remove-untracked='git fetch --prune && git branch -v | grep "\[gone" | awk "{print \$1}" | xargs git branch -D'
+
 source <(kubectl completion zsh)
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C "/usr/bin/symfony self:autocomplete --zsh" symfony
+
+ttyctl -f
