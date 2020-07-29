@@ -52,29 +52,37 @@ endif
     set nocompatible
     set background=dark
 " }}}
-" Setup plug {{{
-    call plug#begin()
+" Setup plugpac {{{
+    call plugpac#begin()
 
+" minpac
+    Pack 'k-takata/minpac', {'type': 'opt'}
+" }}}
 " Vim utility functions {{{
-    Plug 'tomtom/tlib_vim'
-    Plug 'MarcWeber/vim-addon-mw-utils'
+    Pack 'tomtom/tlib_vim'
+    Pack 'MarcWeber/vim-addon-mw-utils'
 " }}}
 " Multiple filetype definition {{{
-    Plug 'sheerun/vim-polyglot'
+    Pack 'sheerun/vim-polyglot'
 " }}}
 " Quote and tags (surroundings) {{{
 " https://github.com/tpope/vim-surround
-    Plug 'tpope/vim-surround'
+    Pack 'tpope/vim-surround'
+" }}}
+" Automatically close pair-characters {{{
+" https://github.com/spf13/vim-autoclose
+    Pack 'spf13/vim-autoclose'
+    let g:autoclose_vim_commentmode=1 " Do not autoclose '"' in vimscript
 " }}}
 " Buffer list in statusline {{{
 " https://github.com/bling/vim-bufferline
-    Plug 'bling/vim-bufferline'
+    Pack 'bling/vim-bufferline'
     let g:bufferline_active_buffer_left = ''
     let g:bufferline_active_buffer_right = ''
 " }}}
 " Lighline: Statusline-light {{{
 " https://github.com/itchyny/lightline.vim
-    Plug 'itchyny/lightline.vim'
+    Pack 'itchyny/lightline.vim'
     set laststatus=2
 
     let g:lightline = {
@@ -121,46 +129,33 @@ endif
 " }}}
 " EasyMotion, Vim motion with highlighting {{{
 " https://github.com/Lokaltog/vim-easymotion
-    Plug 'Lokaltog/vim-easymotion'
+    Pack 'Lokaltog/vim-easymotion'
 " }}}
 " NERDCommenter: Comments helper {{{
 " https://github.com/scrooloose/nerdcommenter
-    Plug 'scrooloose/nerdcommenter'
+    Pack 'scrooloose/nerdcommenter'
 " }}} 
 " UndoTree {{{
 " https://github.com/mbbill/undotree
-    Plug 'mbbill/undotree'
+    Pack 'mbbill/undotree'
     let g:undotree_SetFocusWhenToggle=1
 " }}}
 " Better JSON support {{{
 " https://github.com/elzr/vim-json
-    Plug 'elzr/vim-json', { 'for': 'json' }
+    Pack 'elzr/vim-json', { 'for': 'json' }
 " }}}
 " GitGutter: Git diff in gutter {{{
 " https://github.com/airblade/vim-gitgutter
-    Plug 'airblade/vim-gitgutter'
+    Pack 'airblade/vim-gitgutter'
 " }}}
 " Color schemes {{{
-    Plug 'jacoborus/tender'
+    Pack 'jacoborus/tender'
 " }}}
 " docker-compose syntax {{{
 " https://github.com/ekalinin/Dockerfile.vim
-    Plug 'ekalinin/Dockerfile.vim'
+    Pack 'ekalinin/Dockerfile.vim'
 " }}}
-" fzf {{{
-" https://github.com/junegunn/fzf.vim
-    Plug 'junegunn/fzf.vim'
-" }}}
-" 
-" ripgrep {{{
-" https://github.com/BurntSushi/ripgrep
-    Plug 'BurntSushi/ripgrep'
-" }}}
-" neuron {{{
-" https://github.com/ihsanturk/neuron.vim
-    Plug 'ihsanturk/neuron.vim'
-" }}}
-call plug#end()
+call plugpac#end()
 " }}}
 
 " General Settings {{{
@@ -259,6 +254,10 @@ set pastetoggle=<F12> " Sane indentation on paste
 " Vim UI {{{
 set showmode            " Display active mode
 set cursorline          " Highlight current line
+
+if !has('gui_running')
+  set t_Co=256
+endif
 " }}}
 
 " Fix Shift mistakes {{{
