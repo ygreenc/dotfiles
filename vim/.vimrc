@@ -156,10 +156,6 @@ endif
 " https://github.com/BurntSushi/ripgrep
     Plug 'BurntSushi/ripgrep'
 " }}}
-" neuron {{{
-" https://github.com/ihsanturk/neuron.vim
-    Plug 'ihsanturk/neuron.vim'
-" }}}
 call plug#end()
 " }}}
 
@@ -278,14 +274,6 @@ endif
 " Keymappings {{{
     " Leader key {{{
     let mapleader = ','
-    " }}}
-
-    " Return to normal mode {{{
-    inoremap jk <esc>
-    " }}}
-
-    " Forgot sudo? {{{
-    cmap w!! w !sudo tee % >/dev/null
     " }}}
 
     " Edit mode helper {{{
