@@ -200,6 +200,8 @@ transfer() {
     rm -f $tmpfile
 }
 
+export PATH=$PATH:$HOME/.dotfiles/bin
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
@@ -227,6 +229,14 @@ fh() {
 }
 
 alias git-remove-untracked='git fetch --prune && git branch -v | grep "\[gone" | awk "{print \$1}" | xargs git branch -D'
+
+nn() {
+    vim $(neuron new)
+}
+
+ns() {
+    vim $(neuron search)
+}
 
 source <(kubectl completion zsh)
 
