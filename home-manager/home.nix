@@ -1,6 +1,14 @@
 { config, pkgs, ... }:
 
-{
+let 
+  doom-emacs = pkgs.callPackage (builtins.fetchTarball {
+    url = https://github.com/nix-community/nix-doom-emacs/archive/master.tar.gz;
+  }) {
+    doomPrivateDir = ./doom;  # Directory containing your config.el init.el
+                                      # and packages.el files
+};
+
+in {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = "ygreenc";
@@ -10,6 +18,7 @@
     pkgs.ansible
     pkgs.ansible-lint
     pkgs.awscli2
+    doom-emacs
     pkgs.bat
     pkgs.exa
     pkgs.fd
