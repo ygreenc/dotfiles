@@ -71,9 +71,34 @@ in {
         body = "cd \"$HOME/src/$(fd --type directory --max-depth 1 --strip-cwd-prefix --base-directory $HOME/src . | fzf +m)\"";
         description = "Choose project directory to cd to";
       };
-      git-remove-untracked = {
-        description = "Remove branches deleted remotely";
-        body = "git fetch --prune && git branch -v | grep \"\[gone\" | awk \"{print \$1}\" | xargs git branch -D $argv;";
+      ksvg1x = {
+        description = "Generate Freerice 1x png";
+        body = ''
+          ksvgtopng5 85 86 "$(pwd)/$argv[1]" "$(pwd)/$(basename -s .svg $argv[1])@1x.png"
+          echo "Generated: $(basename -s .svg $argv[1])@1x.png"
+        '';
+      };
+      ksvg2x = {
+        description = "Generate Freerice 2x png";
+        body = ''
+          ksvgtopng5 170 171 "$(pwd)/$argv[1]" "$(pwd)/$(basename -s .svg $argv[1])@2x.png"
+          echo "Generated: $(basename -s .svg $argv[1])@2x.png"
+        '';
+      };
+      ksvg4x = {
+        description = "Generate Freerice 4x png";
+        body = ''
+          ksvgtopng5 340 341 "$(pwd)/$argv[1]" "$(pwd)/$(basename -s .svg $argv[1])@4x.png"
+          echo "Generated: $(basename -s .svg $argv[1])@4x.png"
+        '';
+      };
+      freerice-svg = {
+        description = "Generate Freerice pngs";
+        body = ''
+          ksvg1x "$argv[1]"
+          ksvg2x "$argv[1]"
+          ksvg4x "$argv[1]"
+        '';
       };
     };
 
