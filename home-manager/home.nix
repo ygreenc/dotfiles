@@ -194,4 +194,8 @@ in {
       vimPlugins.vim-surround
     ];
   };
+
+  programs.k9s = {
+    enable = true;
+  };
 }
