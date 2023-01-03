@@ -50,15 +50,19 @@ in {
 
     shellInit = ''
       set -U fish_greetings
+      fish_add_path ~/.nix-profile/bin
     '';
 
     shellAliases = {
       dco = "docker compose";
+      pco = "podman-compose";
       k = "kubectl";
+      lrel = "php ~/src/logalto-releases-tracker/bin/console";
     };
 
     shellAbbrs = {
       dco = "docker compose";
+      pco = "podman-compose";
       k = "kubectl";
     };
 
@@ -112,10 +116,18 @@ in {
           sha256 = "14bdvrnd1v8ffac6fmpfs2cy4q19a4w02yrkc2xjiyqhj9lazgzy";
         };
       }
+
+      {
+        name = "foreign-env";
+        src = pkgs.fishPlugins.foreign-env;
+      }
     ];
 
     interactiveShellInit = ''
       set --global --export ANSIBLE_VAULT_IDENTITY_LIST "~/src/logalto-servers/.vault,comet@~/src/comet-galaxy/.vault,sygestran@~/src/sygestran/.vault"
+      set --global --export DIGITALOCEAN_TOKEN $(cat ~/.digitalocean_token)
+      set --global --export EDITOR vim
+      eval $(doctl completion fish)
     '';
   };
 
