@@ -1,26 +1,18 @@
 { config, pkgs, ... }:
 
-let 
-  doom-emacs = pkgs.callPackage (builtins.fetchTarball {
-    url = https://github.com/nix-community/nix-doom-emacs/archive/master.tar.gz;
-  }) {
-    doomPrivateDir = ./doom;  # Directory containing your config.el init.el
-                                      # and packages.el files
-};
-
-in {
+{
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
-  home.username = "ygreenc";
-  home.homeDirectory = "/home/ygreenc";
+  home.username = "ychateauvert";
+  home.homeDirectory = "/home/ychateauvert";
 
   home.packages = [
     pkgs.ansible
     pkgs.ansible-lint
+    pkgs.python310Packages.boto3
     pkgs.awscli2
-    doom-emacs
     pkgs.bat
-    pkgs.exa
+    pkgs.eza
     pkgs.fd
     pkgs.fzf
     pkgs.htop
@@ -29,6 +21,7 @@ in {
     pkgs.kubectl
     pkgs.kubectx
     pkgs.kubeseal
+    pkgs.opentofu
     pkgs.ripgrep
   ];
 
@@ -40,7 +33,7 @@ in {
   # You can update Home Manager without changing this value. See
   # the Home Manager release notes for a list of state version
   # changes in each release.
-  home.stateVersion = "22.11";
+  home.stateVersion = "23.11";
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
@@ -129,6 +122,11 @@ in {
       set --global --export EDITOR vim
       eval $(doctl completion fish)
     '';
+  };
+
+  programs.atuin = {
+    enable = true;
+    enableFishIntegration = true;
   };
 
   programs.tmux = {
@@ -234,5 +232,20 @@ in {
 
   programs.k9s = {
     enable = true;
+  };
+
+  programs.taskwarrior = {
+    enable = true;
+
+    config = {
+      uda.issue.type = "string";
+      uda.issue.label = "Issue";
+
+      report.ls.columns = [ "id" "start.active" "depends.indicator" "project" "tags" "recur.indicator" "wait.remaining" "scheduled.countdown" "due.countdown" "until.countdown" "description.count" "issue" ];
+      report.ls.labels = [ "ID" "A" "D" "Project" "Tags" "R" "Wait" "S" "Due" "Until" "Description"  "Issue" ];
+
+      report.next.columns = [ "id" "start.age" "entry.age" "depends" "priority" "project" "tags" "recur" "scheduled.countdown" "due.relative" "until.remaining" "description" "urgency" "issue" ];
+      report.next.labels = ["ID" "Active" "Age" "Deps" "P" "Project" "Tag" "Recur" "S" "Due" "Until" "Description" "Urg" "Issue" ];
+    };
   };
 }
