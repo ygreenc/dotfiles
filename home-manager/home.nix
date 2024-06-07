@@ -6,7 +6,13 @@
   home.username = "ychateauvert";
   home.homeDirectory = "/home/ychateauvert";
 
+  home.sessionVariables = {
+    LANG = "en_US.UTF-8";
+    LC_ALL = "en_US.UTF-8";
+  };
+
   home.packages = [
+    pkgs.age
     pkgs.ansible
     pkgs.ansible-lint
     pkgs.python310Packages.boto3
@@ -17,12 +23,15 @@
     pkgs.fzf
     pkgs.htop
     pkgs.jq
+    pkgs.just
     pkgs.k9s
+    pkgs.kind
     pkgs.kubectl
     pkgs.kubectx
     pkgs.kubeseal
     pkgs.opentofu
     pkgs.ripgrep
+    pkgs.sops
   ];
 
   # This value determines the Home Manager release that your
@@ -33,7 +42,7 @@
   # You can update Home Manager without changing this value. See
   # the Home Manager release notes for a list of state version
   # changes in each release.
-  home.stateVersion = "23.11";
+  home.stateVersion = "24.11";
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
@@ -51,6 +60,7 @@
       pco = "podman-compose";
       k = "kubectl";
       lrel = "php ~/src/logalto-releases-tracker/bin/console";
+      j = "just";
     };
 
     shellAbbrs = {
@@ -105,8 +115,8 @@
         src = pkgs.fetchFromGitHub {
           owner = "IlanCosman";
           repo = "tide";
-          rev = "32e4b8dcf84d618801bd5ce82bc9e95b917c3935";
-          sha256 = "14bdvrnd1v8ffac6fmpfs2cy4q19a4w02yrkc2xjiyqhj9lazgzy";
+          rev = "v6.1.1";
+          hash = "sha256-ZyEk/WoxdX5Fr2kXRERQS1U1QHH3oVSyBQvlwYnEYyc=";
         };
       }
 
@@ -120,8 +130,14 @@
       set --global --export ANSIBLE_VAULT_IDENTITY_LIST "~/src/logalto-servers/.vault,comet@~/src/comet-galaxy/.vault,sygestran@~/src/sygestran/.vault"
       set --global --export DIGITALOCEAN_TOKEN $(cat ~/.digitalocean_token)
       set --global --export EDITOR vim
+      set --global --export TFENV_CONFIG_DIR ~/.config/tfenv
+
+      set --universal tide_right_prompt_items status cmd_duration context jobs node rustc docker php go kubectl terraform aws time
+      set --universal tide_jobs_number_threshold 2
+
       eval $(doctl completion fish)
     '';
+
   };
 
   programs.atuin = {
@@ -201,6 +217,9 @@
       # Temporary files directory
       backupdir = ["~/.vim/backup"];
 
+      # Temporary swap files directory
+      directory = ["~/.vim/swap"];
+
       # Undo
       undodir = ["~/.vim/undo"];
       undofile = true;
@@ -237,6 +256,8 @@
   programs.taskwarrior = {
     enable = true;
 
+    package = pkgs.taskwarrior3;
+
     config = {
       uda.issue.type = "string";
       uda.issue.label = "Issue";
@@ -246,6 +267,9 @@
 
       report.next.columns = [ "id" "start.age" "entry.age" "depends" "priority" "project" "tags" "recur" "scheduled.countdown" "due.relative" "until.remaining" "description" "urgency" "issue" ];
       report.next.labels = ["ID" "Active" "Age" "Deps" "P" "Project" "Tag" "Recur" "S" "Due" "Until" "Description" "Urg" "Issue" ];
+
+      urgency.user.project.wfp.coefficient = 2;
+      urgency.user.project.freerice.coefficient = 1;
     };
   };
 }
