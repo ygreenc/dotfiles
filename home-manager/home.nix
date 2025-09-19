@@ -15,11 +15,8 @@
     pkgs.age
     pkgs.ansible
     pkgs.ansible-lint
-    pkgs.python310Packages.boto3
-    pkgs.awscli2
+    pkgs.python312Packages.boto3
     pkgs.bat
-    pkgs.eza
-    pkgs.fd
     pkgs.fzf
     pkgs.htop
     pkgs.jq
@@ -29,9 +26,12 @@
     pkgs.kubectl
     pkgs.kubectx
     pkgs.kubeseal
+    pkgs.mydumper
     pkgs.opentofu
+    pkgs.rage
     pkgs.ripgrep
     pkgs.sops
+    pkgs.tdrop
   ];
 
   # This value determines the Home Manager release that your
@@ -57,15 +57,13 @@
 
     shellAliases = {
       dco = "docker compose";
-      pco = "podman-compose";
       k = "kubectl";
-      lrel = "php ~/src/logalto-releases-tracker/bin/console";
       j = "just";
+      ls = "eza --hyperlink";
     };
 
     shellAbbrs = {
       dco = "docker compose";
-      pco = "podman-compose";
       k = "kubectl";
     };
 
@@ -112,12 +110,7 @@
     plugins = [
       {
         name = "tide";
-        src = pkgs.fetchFromGitHub {
-          owner = "IlanCosman";
-          repo = "tide";
-          rev = "v6.1.1";
-          hash = "sha256-ZyEk/WoxdX5Fr2kXRERQS1U1QHH3oVSyBQvlwYnEYyc=";
-        };
+        src = pkgs.fishPlugins.tide;
       }
 
       {
@@ -259,6 +252,8 @@
     package = pkgs.taskwarrior3;
 
     config = {
+      news.version = 99999;
+
       uda.issue.type = "string";
       uda.issue.label = "Issue";
 
@@ -272,4 +267,65 @@
       urgency.user.project.freerice.coefficient = 1;
     };
   };
+
+  programs.awscli = {
+    enable = true;
+
+    settings = {
+      "default" = {
+        "region" = "eu-west-1";
+        "signature_version" = "s3v4";
+      };
+
+      "profile devalto" = {
+        "region" = "us-east-1";
+      };
+
+      "profile wfp-ci" = {
+        "sso_start_url" = "https://wfp.awsapps.com/start#/";
+        "sso_region" = "eu-west-1";
+        "sso_account_id" = "878230841112";
+        "sso_role_name" = "LocalApplicationAdministrator";
+        "region" = "eu-west-1";
+      };
+
+      "profile wfp-dev" = {
+        "sso_start_url" = "https://wfp.awsapps.com/start#/";
+        "sso_region" = "eu-west-1";
+        "sso_account_id" = "521231022227";
+        "sso_role_name" = "LocalApplicationAdministrator";
+        "region" = "eu-west-1";
+      };
+
+      "profile wfp-qa" = {
+        "sso_start_url" = "https://wfp.awsapps.com/start#/";
+        "sso_region" = "eu-west-1";
+        "sso_account_id" = "033102915094";
+        "sso_role_name" = "LocalApplicationAdministrator";
+        "region" = "eu-west-1";
+      };
+
+      "profile wfp-prod" = {
+        "sso_start_url" = "https://wfp.awsapps.com/start#/";
+        "sso_region" = "eu-west-1";
+        "sso_account_id" = "207251198262";
+        "sso_role_name" = "LocalApplicationAdministrator";
+        "region" = "us-east-1";
+      };
+
+      "profile freerice" = {
+        "sso_start_url" = "https://wfp.awsapps.com/start#/";
+        "sso_region" = "eu-west-1";
+        "sso_account_id" = "564635962753";
+        "sso_role_name" = "LocalApplicationAdministrator";
+        "region" = "us-east-1";
+      };
+    };
+  };
+
+  programs.eza.enable = true;
+  programs.fd.enable = true;
+  programs.numbat.enable = true;
+  programs.visidata.enable = true;
+  programs.helix.enable = true;
 }
