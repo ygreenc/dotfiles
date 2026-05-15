@@ -17,6 +17,7 @@
     pkgs.ansible-lint
     pkgs.python312Packages.boto3
     pkgs.bat
+    pkgs.fx
     pkgs.fzf
     pkgs.htop
     pkgs.jq
@@ -26,7 +27,6 @@
     pkgs.kubectl
     pkgs.kubectx
     pkgs.kubeseal
-    pkgs.mydumper
     pkgs.opentofu
     pkgs.rage
     pkgs.ripgrep
@@ -110,12 +110,12 @@
     plugins = [
       {
         name = "tide";
-        src = pkgs.fishPlugins.tide;
-      }
-
-      {
-        name = "foreign-env";
-        src = pkgs.fishPlugins.foreign-env;
+        src = pkgs.fetchFromGitHub {
+          owner = "IlanCosman";
+          repo = "tide";
+          rev = "v6.2.0";
+          hash = "sha256-ZyEk/WoxdX5Fr2kXRERQS1U1QHH3oVSyBQvlwYnEYyc=";
+        };
       }
     ];
 
@@ -181,6 +181,9 @@
       bind | split-window -h
       # Split vertically
       bind - split-window
+
+      # Support mouse events
+      set -g mouse on
     '';
   };
 
@@ -257,11 +260,15 @@
       uda.issue.type = "string";
       uda.issue.label = "Issue";
 
-      report.ls.columns = [ "id" "start.active" "depends.indicator" "project" "tags" "recur.indicator" "wait.remaining" "scheduled.countdown" "due.countdown" "until.countdown" "description.count" "issue" ];
-      report.ls.labels = [ "ID" "A" "D" "Project" "Tags" "R" "Wait" "S" "Due" "Until" "Description"  "Issue" ];
+      uda.notion.type = "string";
+      uda.notion.label = "Notion";
 
-      report.next.columns = [ "id" "start.age" "entry.age" "depends" "priority" "project" "tags" "recur" "scheduled.countdown" "due.relative" "until.remaining" "description" "urgency" "issue" ];
-      report.next.labels = ["ID" "Active" "Age" "Deps" "P" "Project" "Tag" "Recur" "S" "Due" "Until" "Description" "Urg" "Issue" ];
+      report.ls.columns = [ "id" "start.active" "depends.indicator" "project" "tags" "recur.indicator" "wait.remaining" "scheduled.countdown" "due.countdown" "until.countdown" "description.count" "issue" "notion" ];
+      report.ls.labels = [ "ID" "A" "D" "Project" "Tags" "R" "Wait" "S" "Due" "Until" "Description"  "Issue" "Notion"];
+
+      report.next.columns = [ "id" "start.age" "entry.age" "depends" "priority" "project" "tags" "recur" "scheduled.countdown" "due.relative" "until.remaining" "description" "urgency" "issue" "notion"];
+      report.next.labels = ["ID" "Active" "Age" "Deps" "P" "Project" "Tag" "Recur" "S" "Due" "Until" "Description" "Urg" "Issue" "Notion"];
+      report.next.filte = "status:pending -WAITING -BLOCKED limit:page";
 
       urgency.user.project.wfp.coefficient = 2;
       urgency.user.project.freerice.coefficient = 1;
@@ -270,6 +277,12 @@
 
   programs.awscli = {
     enable = true;
+
+    package = pkgs.awscli2.overridePythonAttrs (old: {
+      doCheck = false;
+      dontCheck = true;
+      checkPhase = "true";
+    });
 
     settings = {
       "default" = {
@@ -320,6 +333,14 @@
         "sso_role_name" = "LocalApplicationAdministrator";
         "region" = "us-east-1";
       };
+
+      "profile comet" = {
+        "sso_start_url" = "https://wfp.awsapps.com/start#/";
+        "sso_region" = "eu-west-1";
+        "sso_account_id" = "184517591100";
+        "sso_role_name" = "LocalApplicationAdministrator";
+        "region" = "eu-west-1";
+      };
     };
   };
 
@@ -328,4 +349,127 @@
   programs.numbat.enable = true;
   programs.visidata.enable = true;
   programs.helix.enable = true;
+
+  programs.emacs = {
+    enable = true;
+
+    package = pkgs.emacs;
+
+    extraPackages = epkgs: with epkgs; [
+      evil
+      evil-collection
+      general
+
+      which-key
+      vertico
+      orderless
+      marginalia
+      consult
+      embark
+      embark-consult
+
+      magit
+      direnv
+      markdown-mode
+      nix-mode
+    ];
+  };
+
+  services.emacs.enable = true;
+
+  xdg.configFile."emacs/early-init.el".text = ''
+    ;; Home Manager/Nix provides packages, so don't auto-load package.el.
+    (setq package-enable-at-startup nil)
+  '';
+
+  xdg.configFile."emacs/init.el".text = ''
+    (setq inhibit-startup-screen t
+          ring-bell-function 'ignore
+          use-package-always-ensure nil
+          custom-file (locate-user-emacs-file "custom.el"))
+
+    (load custom-file 'noerror 'nomessage)
+    (require 'use-package)
+
+    ;; Vim layer
+    (use-package evil
+      :init
+      (setq evil-want-keybinding nil
+            evil-want-C-u-scroll t
+            evil-want-C-i-jump nil)
+      :config
+      (evil-mode 1))
+
+    (use-package evil-collection
+      :after evil
+      :config
+      (evil-collection-init))
+
+    ;; SPC leader, Vim-style
+    (use-package general
+      :after evil
+      :config
+      (general-create-definer my/leader
+        :states '(normal visual motion)
+        :keymaps 'override
+        :prefix "SPC")
+
+      (my/leader
+        "f f" '(find-file :which-key "find file")
+        "b b" '(consult-buffer :which-key "switch buffer")
+	"s g" '(consult-ripgrep :which-key "search recursively")
+        "g g" '(magit-status :which-key "git")
+        "p p" '(project-switch-project :which-key "project")
+        "h k" '(describe-key :which-key "describe key")
+        "h f" '(describe-function :which-key "describe function")
+        "h v" '(describe-variable :which-key "describe variable")))
+
+    ;; Discoverability
+    (use-package which-key
+      :config
+      (which-key-mode 1))
+
+    ;; Better minibuffer/completion
+    (use-package vertico
+      :config
+      (vertico-mode 1))
+
+    (use-package orderless
+      :custom
+      (completion-styles '(orderless basic)))
+
+    (use-package marginalia
+      :config
+      (marginalia-mode 1))
+
+    (use-package consult
+      :commands
+      (consult-line
+       consult-buffer
+       consult-goto-line
+       consult-ripgrep
+       consult-find
+       consult-grep
+       consult-git-grep)
+       
+      :bind (("C-s" . consult-line)
+             ("C-x b" . consult-buffer)
+             ("M-g g" . consult-goto-line)))
+
+    ;; Git
+    (use-package magit
+      :bind (("C-x g" . magit-status)))
+
+    ;; direnv integration
+    (use-package direnv
+      :config
+      (direnv-mode 1))
+
+    (use-package markdown-mode
+      :commands (markdown-mode gfm-mode)
+      :mode
+      (("\\.md\\'" . gfm-mode)
+       ("README\\.md\\'" . gfm-mode)
+       ("\\.markdown\\'" . markdown-mode)))
+  '';
 }
