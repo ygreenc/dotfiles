@@ -187,6 +187,17 @@
     '';
   };
 
+  programs.zellij = {
+    enable = true;
+
+    enableFishIntegration = true;
+    attachExistingSession = true;
+
+    settings = {
+      scroll_buffer_size = 30000;
+    };
+  };
+
   programs.vim = {
     enable = true;
 
