@@ -191,10 +191,11 @@
     enable = true;
 
     enableFishIntegration = true;
-    attachExistingSession = true;
 
     settings = {
       scroll_buffer_size = 30000;
+      default_layout = "default";
+      show_startup_tips = false;
     };
   };
 
@@ -289,7 +290,7 @@
   programs.awscli = {
     enable = true;
 
-    package = pkgs.awscli2.overridePythonAttrs (old: {
+    package = pkgs.awscli2.overridePythonAttrs (_old: {
       doCheck = false;
       dontCheck = true;
       checkPhase = "true";
