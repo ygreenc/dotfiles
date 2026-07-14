@@ -15,7 +15,7 @@
     pkgs.age
     pkgs.ansible
     pkgs.ansible-lint
-    pkgs.python312Packages.boto3
+  #  pkgs.python312Packages.boto3
     pkgs.bat
     pkgs.fx
     pkgs.fzf
@@ -30,8 +30,6 @@
     pkgs.opentofu
     pkgs.rage
     pkgs.ripgrep
-    pkgs.sops
-    pkgs.tdrop
   ];
 
   # This value determines the Home Manager release that your
@@ -290,11 +288,11 @@
   programs.awscli = {
     enable = true;
 
-    package = pkgs.awscli2.overridePythonAttrs (_old: {
-      doCheck = false;
-      dontCheck = true;
-      checkPhase = "true";
-    });
+    #package = pkgs.awscli2.overridePythonAttrs (_old: {
+    #  doCheck = false;
+    #  dontCheck = true;
+    #  checkPhase = "true";
+    #});
 
     settings = {
       "default" = {
@@ -361,127 +359,4 @@
   programs.numbat.enable = true;
   programs.visidata.enable = true;
   programs.helix.enable = true;
-
-  programs.emacs = {
-    enable = true;
-
-    package = pkgs.emacs;
-
-    extraPackages = epkgs: with epkgs; [
-      evil
-      evil-collection
-      general
-
-      which-key
-      vertico
-      orderless
-      marginalia
-      consult
-      embark
-      embark-consult
-
-      magit
-      direnv
-      markdown-mode
-      nix-mode
-    ];
-  };
-
-  services.emacs.enable = true;
-
-  xdg.configFile."emacs/early-init.el".text = ''
-    ;; Home Manager/Nix provides packages, so don't auto-load package.el.
-    (setq package-enable-at-startup nil)
-  '';
-
-  xdg.configFile."emacs/init.el".text = ''
-    (setq inhibit-startup-screen t
-          ring-bell-function 'ignore
-          use-package-always-ensure nil
-          custom-file (locate-user-emacs-file "custom.el"))
-
-    (load custom-file 'noerror 'nomessage)
-    (require 'use-package)
-
-    ;; Vim layer
-    (use-package evil
-      :init
-      (setq evil-want-keybinding nil
-            evil-want-C-u-scroll t
-            evil-want-C-i-jump nil)
-      :config
-      (evil-mode 1))
-
-    (use-package evil-collection
-      :after evil
-      :config
-      (evil-collection-init))
-
-    ;; SPC leader, Vim-style
-    (use-package general
-      :after evil
-      :config
-      (general-create-definer my/leader
-        :states '(normal visual motion)
-        :keymaps 'override
-        :prefix "SPC")
-
-      (my/leader
-        "f f" '(find-file :which-key "find file")
-        "b b" '(consult-buffer :which-key "switch buffer")
-	"s g" '(consult-ripgrep :which-key "search recursively")
-        "g g" '(magit-status :which-key "git")
-        "p p" '(project-switch-project :which-key "project")
-        "h k" '(describe-key :which-key "describe key")
-        "h f" '(describe-function :which-key "describe function")
-        "h v" '(describe-variable :which-key "describe variable")))
-
-    ;; Discoverability
-    (use-package which-key
-      :config
-      (which-key-mode 1))
-
-    ;; Better minibuffer/completion
-    (use-package vertico
-      :config
-      (vertico-mode 1))
-
-    (use-package orderless
-      :custom
-      (completion-styles '(orderless basic)))
-
-    (use-package marginalia
-      :config
-      (marginalia-mode 1))
-
-    (use-package consult
-      :commands
-      (consult-line
-       consult-buffer
-       consult-goto-line
-       consult-ripgrep
-       consult-find
-       consult-grep
-       consult-git-grep)
-       
-      :bind (("C-s" . consult-line)
-             ("C-x b" . consult-buffer)
-             ("M-g g" . consult-goto-line)))
-
-    ;; Git
-    (use-package magit
-      :bind (("C-x g" . magit-status)))
-
-    ;; direnv integration
-    (use-package direnv
-      :config
-      (direnv-mode 1))
-
-    (use-package markdown-mode
-      :commands (markdown-mode gfm-mode)
-      :mode
-      (("\\.md\\'" . gfm-mode)
-       ("README\\.md\\'" . gfm-mode)
-       ("\\.markdown\\'" . markdown-mode)))
-  '';
 }
