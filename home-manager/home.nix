@@ -15,7 +15,6 @@
     pkgs.age
     pkgs.ansible
     pkgs.ansible-lint
-  #  pkgs.python312Packages.boto3
     pkgs.bat
     pkgs.fx
     pkgs.fzf
@@ -188,7 +187,8 @@
   programs.zellij = {
     enable = true;
 
-    enableFishIntegration = true;
+    # Don't start zellij automatically
+    enableFishIntegration = false;
 
     settings = {
       scroll_buffer_size = 30000;
